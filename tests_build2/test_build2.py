@@ -192,6 +192,16 @@ class FailureAndConsumerTests(unittest.TestCase):
         self.assertEqual("unresolved", checked.status)
         self.assertEqual("backend_exception", bundle["reason"])
 
+    def test_missing_backend_is_unresolved(self):
+        original = backend.linprog
+        backend.linprog = None
+        try:
+            bundle, checked = solve_and_check(self.model, self.query)
+        finally:
+            backend.linprog = original
+        self.assertEqual("unresolved", checked.status)
+        self.assertEqual("backend_exception", bundle["reason"])
+
     def test_absent_backend_certificate_is_unresolved(self):
         def absent(problem_raw, query_raw, problem, query):
             from writ_decision_lab.build2.engine import _unresolved
@@ -285,6 +295,17 @@ class BaselineAndReproducibilityTests(unittest.TestCase):
             )
             self.assertEqual(0, result.returncode, result.stderr)
             self.assertIn('"stale_reuse_refused": true', result.stdout)
+
+    def test_checker_import_does_not_load_scipy_backend(self):
+        result = subprocess.run(
+            [sys.executable, "-c", "import sys; from writ_decision_lab.build2.checker import check; print('scipy' in sys.modules)"],
+            cwd=ROOT,
+            env={"PYTHONPATH": str(ROOT / "src")},
+            text=True,
+            capture_output=True,
+        )
+        self.assertEqual(0, result.returncode, result.stderr)
+        self.assertEqual("False", result.stdout.strip())
 
 
 if __name__ == "__main__":

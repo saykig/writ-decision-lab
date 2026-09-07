@@ -72,10 +72,10 @@ candidate, but its certificate interface was not reproduced here. See
 
 Final reviewed-state commands and exact results:
 
-- `PYTHONPATH=src python -m unittest discover -s tests_build2 -v` — 37 tests
-  passed in 0.661 seconds.
-- `PYTHONPATH=src python -O -m unittest discover -s tests_build2 -v` — 37 tests
-  passed in 0.612 seconds.
+- `PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src python -m unittest discover -s
+  tests_build2 -v` — 39 tests passed in 0.622 seconds.
+- `PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src python -O -m unittest discover -s
+  tests_build2 -v` — 39 tests passed in 0.649 seconds.
 - `PYTHONPATH=src python examples/build2/change_and_recheck.py` — completed;
   stale reuse refused, new maximum changed from `3/4` to `1/2`, and the old
   checked result remained valid under the old bytes.

@@ -6,7 +6,10 @@ from fractions import Fraction
 from hashlib import sha256
 from typing import Iterable
 
-from scipy.optimize import linprog
+try:
+    from scipy.optimize import linprog
+except ImportError:  # checker-only installations remain usable
+    linprog = None
 
 from .exact import fraction_text
 from .model import Problem, Query
@@ -34,6 +37,8 @@ def _mat(problem: Problem):
 
 
 def _primal(problem: Problem, objective: tuple[Fraction, ...]):
+    if linprog is None:
+        raise RuntimeError("scipy_backend_unavailable")
     A, b, C, d = _mat(problem)
     return linprog(
         [float(x) for x in objective],
@@ -48,6 +53,8 @@ def _primal(problem: Problem, objective: tuple[Fraction, ...]):
 
 def _upper_certificate(problem: Problem, objective: tuple[Fraction, ...]):
     """Search for y free, z>=0: A^T y + C^T z >= objective."""
+    if linprog is None:
+        raise RuntimeError("scipy_backend_unavailable")
     m, k, n = len(problem.equalities), len(problem.inequalities), problem.dimension
     c = []
     for row in problem.equalities:
@@ -78,6 +85,8 @@ def _upper_certificate(problem: Problem, objective: tuple[Fraction, ...]):
 
 
 def _farkas(problem: Problem):
+    if linprog is None:
+        raise RuntimeError("scipy_backend_unavailable")
     m, k, n = len(problem.equalities), len(problem.inequalities), problem.dimension
     c = [0.0] * (2 * m + k)
     aub, bub = [], []
@@ -191,4 +200,3 @@ def search(problem_raw: bytes, query_raw: bytes, problem: Problem, query: Query)
         out.update(status="decision_candidate", evidence={"pairs": pairs})
         return out
     raise AssertionError("decoded operation not handled")
-
