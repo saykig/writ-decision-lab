@@ -1,0 +1,6 @@
+test_manifest_independently_reconstructed_from_repository_root (test_pr1_repairs.RepairTests.test_manifest_independently_reconstructed_from_repository_root) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.002s
+
+OK

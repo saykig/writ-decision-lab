@@ -69,3 +69,18 @@ After three suitable real research tasks, reassess actual reuse and maintenance 
 tasks to fit this profile. Continue the component only if a real consumer values the public checked
 boundary; otherwise retain the math/tests/fixtures and use the simpler workflow. Vela or formal
 proof work remains deferred until an actual accepted-state or theorem bottleneck warrants it.
+
+## PR #1 repair appendix — 6 September 2026
+
+The preceding handoff is preserved as historical evidence. Current repair status and the narrower
+interpretation of the baseline preference are in [PR1_REPAIR_REPORT.md](PR1_REPAIR_REPORT.md),
+[PR1_REVIEW_RESPONSE.md](PR1_REVIEW_RESPONSE.md), and
+[PR1_CHALLENGE_MATRIX.md](PR1_CHALLENGE_MATRIX.md). All seven explicitly requested repairs pass
+local regression checks (60 normal / 60 optimized); exact replay of missing reviewer artifacts and
+an audit against the absent outer directive remain uncompleted. This does not authorize merge.
+
+Checked answer and report mappings are now recursively immutable; Python arrays expose tuples,
+while JSON arrays and the editable consumer summary retain their wire meaning. Use the public
+fresh-check boundary. New evidence lives under `evidence/pr1-repair/`; original `outputs/` and
+`BUILD_1_REPORT.md` remain untouched. The baseline preference is a trusted-fixture judgment and
+must not be read as equal assurance or a measurement of pure wrapper cost.

@@ -1,0 +1,125 @@
+{
+  "runtime": "3.13.15 (main, Aug  5 2026, 12:25:43) [Clang 21.0.0 (clang-2100.1.1.101)]",
+  "optimized": 0,
+  "source": "sha256:2ff46c7ae832a8b51d6bb038c3e324d7295950b820f3a9a5528e3ed2dc560431",
+  "manifest": [
+    {
+      "path": "writ_decision_lab/__init__.py",
+      "sha256": "sha256:fec4b7269d86b96269e8a30d2b4cc79c7ca83873fd6b49979c1f0442494edd36"
+    },
+    {
+      "path": "writ_decision_lab/__main__.py",
+      "sha256": "sha256:3d2438ae92f4746e9ffaa1f837b1fe803f6281091d1f31f8c95643716f257d9a"
+    },
+    {
+      "path": "writ_decision_lab/checker.py",
+      "sha256": "sha256:84a511de331c7a0c834c1a0c691409af309f72bc5df8808da0a01b473ad59867"
+    },
+    {
+      "path": "writ_decision_lab/cli.py",
+      "sha256": "sha256:637feee8f375266adf80c5ef64e94d06e721a4fb221abebf2e414081edee6a94"
+    },
+    {
+      "path": "writ_decision_lab/consumer.py",
+      "sha256": "sha256:54161101963bbf54bb11524912aea5dcb9202a3b72d7de2d4c192cef0f251b6a"
+    },
+    {
+      "path": "writ_decision_lab/decode.py",
+      "sha256": "sha256:9574bb592363897e72ce115f394e3190acd5be257895ed6351a18ea8fc334aa5"
+    },
+    {
+      "path": "writ_decision_lab/errors.py",
+      "sha256": "sha256:df1e265fb690ccfb5022b43ff8dcceed2dd485bbba70905a40a71d4dc37bf060"
+    },
+    {
+      "path": "writ_decision_lab/identity.py",
+      "sha256": "sha256:b39caea28df902a26ee7f4f1a6985ae956599bcde8c9ccc258658453160513de"
+    },
+    {
+      "path": "writ_decision_lab/solver.py",
+      "sha256": "sha256:033c8da77caa5176b713103b33cdf443051c84585e362ac2e7886149a9bf23ec"
+    },
+    {
+      "path": "writ_decision_lab/types.py",
+      "sha256": "sha256:6aa52d0580750ae4cb4a0206c20be87b4bb042dbf15f378580b21f1a17a418cb"
+    }
+  ],
+  "summary_before": {
+    "schema": "wdl.consumer-summary.v1",
+    "semantics": "finite-one-observation.v1",
+    "current_argmin": [
+      "a0"
+    ],
+    "evsi": "1/8",
+    "acquisition_argmin": [
+      "observe_once"
+    ]
+  },
+  "summary_after": {
+    "schema": "wdl.consumer-summary.v1",
+    "semantics": "finite-one-observation.v1",
+    "current_argmin": [
+      "a0",
+      "never_checked"
+    ],
+    "evsi": "999/1",
+    "acquisition_argmin": [
+      "observe_once"
+    ]
+  },
+  "record_status": "computation_mismatch",
+  "typed_status": "checked",
+  "unicode_diagnostic": {
+    "checker": {
+      "code_sha256": "sha256:2ff46c7ae832a8b51d6bb038c3e324d7295950b820f3a9a5528e3ed2dc560431",
+      "method": "joint-mass-and-policy-enumeration.v1",
+      "name": "writ-decision-lab",
+      "python_version": "3.13.15"
+    },
+    "diagnostics": [
+      {
+        "code": "E_UNICODE_SCALAR",
+        "message": "String contains a surrogate code point.",
+        "path": "$.REPAIR_SYNTHETIC_CANARY.nested"
+      }
+    ],
+    "limitations": [
+      "Checks the supplied finite one-observation calculation only.",
+      "Does not validate source fidelity, real-world assumptions, or cross-question sufficiency.",
+      "Is not a formal proof, independent authorship, scientific acceptance, or permission to skip fresh checking.",
+      "Producer and checker share the strict parser, immutable input types, Fraction library, specification, and author."
+    ],
+    "policy_count": null,
+    "schema": "wdl.check.v1",
+    "semantics": "finite-one-observation.v1",
+    "status": "invalid_input",
+    "subject": {
+      "model_sha256": "sha256:99f36e6aa9051c1584ecaad9489dd2cc60d39fadccc7c3cdf14cc2facef0b33e",
+      "query_sha256": "sha256:5b1dff2870f580d20a5776332a5e80c86b43ab9bb26ee621ce829b39286ea820",
+      "result_sha256": "sha256:e14f7b1452b113aba0ea6508884997db729a630589882cea7053592a70785530"
+    }
+  },
+  "depths": {
+    "32": {
+      "decoder": "out_of_scope",
+      "checker": "out_of_scope"
+    },
+    "33": {
+      "decoder": "out_of_scope",
+      "checker": "out_of_scope"
+    },
+    "995": {
+      "decoder": "out_of_scope",
+      "checker": "checker_error"
+    },
+    "1100": {
+      "decoder": "RecursionError",
+      "checker": "checker_error"
+    },
+    "2000": {
+      "decoder": "RecursionError",
+      "checker": "checker_error"
+    }
+  },
+  "post_decode_failure": "RuntimeError"
+}
