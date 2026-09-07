@@ -8,6 +8,7 @@ import json
 from pathlib import Path
 import sys
 from typing import Any
+from collections.abc import Mapping
 
 from .types import RuntimeContext
 
@@ -19,7 +20,7 @@ def digest_bytes(data: bytes) -> str:
 def wire(value: Any) -> Any:
     if isinstance(value, Fraction):
         return f"{value.numerator}/{value.denominator}"
-    if isinstance(value, dict):
+    if isinstance(value, Mapping):
         return {key: wire(item) for key, item in value.items()}
     if isinstance(value, (tuple, list)):
         return [wire(item) for item in value]
@@ -39,14 +40,13 @@ def output_bytes(value: Any) -> bytes:
 
 def source_manifest(package_dir: Path | None = None) -> list[dict[str, str]]:
     base = package_dir or Path(__file__).resolve().parent
-    src_root = base.parent
     entries: list[dict[str, str]] = []
     for path in sorted(base.rglob("*.py")):
         if "__pycache__" in path.parts:
             continue
         entries.append(
             {
-                "path": path.relative_to(src_root).as_posix(),
+                "path": "src/writ_decision_lab/" + path.relative_to(base).as_posix(),
                 "sha256": digest_bytes(path.read_bytes()),
             }
         )

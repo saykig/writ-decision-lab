@@ -5,6 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from fractions import Fraction
 from typing import Any, Mapping
+from types import MappingProxyType
 
 from .errors import Diagnostic
 
@@ -32,12 +33,24 @@ class RuntimeContext:
     python_version: str
 
 
+def _snapshot(value: Any) -> Any:
+    """Detach and recursively freeze JSON data against ordinary caller mutation."""
+    if isinstance(value, Mapping):
+        return MappingProxyType({key: _snapshot(item) for key, item in value.items()})
+    if isinstance(value, (list, tuple)):
+        return tuple(_snapshot(item) for item in value)
+    return value
+
+
 @dataclass(frozen=True)
 class CheckReport:
     record: Mapping[str, Any]
     status: str
     diagnostics: tuple[Diagnostic, ...]
     policy_count: int | None
+
+    def __post_init__(self) -> None:
+        object.__setattr__(self, "record", _snapshot(self.record))
 
 
 @dataclass(frozen=True)
@@ -48,6 +61,9 @@ class CheckedAnswer:
     model_sha256: str
     query_sha256: str
     result_sha256: str
+
+    def __post_init__(self) -> None:
+        object.__setattr__(self, "answer", _snapshot(self.answer))
 
     def summary(self) -> dict[str, Any]:
         return {

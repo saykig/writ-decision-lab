@@ -74,7 +74,8 @@ or review field.
 Generated JSON uses sorted object keys, compact separators, ASCII escaping, no NaN, and one final
 LF (`wdl-json-output.v1`). Arrays preserve semantic order. Input bindings hash original bytes with
 SHA-256; whitespace changes identity. `code_sha256` hashes the deterministic sorted manifest of
-all shipped `.py` files under `src/writ_decision_lab`, using relative forward-slash paths and raw
+all shipped `.py` files under `src/writ_decision_lab`, using repository-relative forward-slash paths (for example
+`src/writ_decision_lab/__init__.py`) and raw
 file hashes. It is a source association, not runtime attestation or a signature.
 
 ## 5. Checking method
@@ -138,3 +139,15 @@ zero is `0/1`. UTF-8 BOMs, malformed UTF-8, surrogate scalar strings, duplicate 
 non-JSON constants, trailing data, excessive nesting, numeric literals, booleans/null in rational
 positions, missing fields, and unknown fields are rejected. Unsupported exact versions are out of
 scope rather than guessed.
+
+## PR #1 boundary clarification
+
+Checked answers and check records retain recursively immutable, detached snapshots;
+JSON serialization preserves the original array/object wire shapes. Summaries are fresh
+editable copies. This protects ordinary callers, not malicious code in the same process.
+JSON depth counts the root value as level one and each contained value as one further
+level (including scalars; empty containers add no child). A string-aware preflight bounds
+parser recursion before decoding; if nesting already exceeds the resource bound, depth
+rejection takes precedence even if later syntax would also be malformed. Within the bound,
+malformed JSON remains `invalid_input` / `E_JSON`. Early Unicode diagnostics use `$` because
+unvalidated object keys are not safe schema paths. Unknown-field diagnostics do not echo keys.

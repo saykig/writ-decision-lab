@@ -18,7 +18,7 @@ class ComparisonTests(unittest.TestCase):
             environment = dict(os.environ)
             environment["PYTHONPATH"] = str(ROOT / "src")
             run = subprocess.run(
-                [sys.executable, str(ROOT / "comparison" / "run_sequence.py"), "--output", str(output)],
+                [sys.executable, *(["-O"] if sys.flags.optimize else []), str(ROOT / "comparison" / "run_sequence.py"), "--output", str(output)],
                 cwd=ROOT,
                 env=environment,
                 stdout=subprocess.PIPE,

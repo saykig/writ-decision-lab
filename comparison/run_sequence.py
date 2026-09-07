@@ -65,17 +65,17 @@ def run_candidate() -> dict[str, Any]:
     steps.append({"step": 2, "passed": f02["evsi"] == "1/4", "evsi": f02["evsi"]})
     f10_model, f10_query = fixture("F10-acquisition-tie")
     f10 = check_and_load(f10_model, f10_query, solve_bytes(f10_model, f10_query)).answer
-    steps.append({"step": 3, "passed": f10["acquisition_argmin"] == ["act_now", "observe_once"], "acquisition_argmin": f10["acquisition_argmin"]})
+    steps.append({"step": 3, "passed": list(f10["acquisition_argmin"]) == ["act_now", "observe_once"], "acquisition_argmin": f10["acquisition_argmin"]})
     f03_model, f03_query = fixture("F03-no-signal-unit")
     f03_result = solve_bytes(f03_model, f03_query)
     f03 = check_and_load(f03_model, f03_query, f03_result).answer
     f05_model, f05_query = fixture("F05-revised-unit")
     f05 = check_and_load(f05_model, f05_query, solve_bytes(f05_model, f05_query)).answer
-    old_still_valid = check_and_load(f03_model, f03_query, f03_result).answer["current_argmin"] == ["a0"]
-    steps.append({"step": 4, "passed": f03["current_argmin"] == ["a0"] and f05["current_argmin"] == ["a1"] and old_still_valid, "old_result_preserved": old_still_valid})
+    old_still_valid = check_and_load(f03_model, f03_query, f03_result).summary()["current_argmin"] == ["a0"]
+    steps.append({"step": 4, "passed": list(f03["current_argmin"]) == ["a0"] and list(f05["current_argmin"]) == ["a1"] and old_still_valid, "old_result_preserved": old_still_valid})
     f12_model, f12_query = fixture("F12-restricted-actions")
     f12 = check_and_load(f12_model, f12_query, solve_bytes(f12_model, f12_query)).answer
-    steps.append({"step": 5, "passed": f12["action_order"] == ["a0"] and f12["evsi"] == "0/1", "actions": f12["action_order"]})
+    steps.append({"step": 5, "passed": list(f12["action_order"]) == ["a0"] and f12["evsi"] == "0/1", "actions": f12["action_order"]})
     refused = expected_failure(lambda: check_and_load(f01_model, f10_query, f01_result), "input_mismatch")
     original_rechecked = check_and_load(f01_model, f01_query, f01_result).answer["evsi"] == "1/8"
     refused.update({"step": 6, "original_rechecked": original_rechecked, "passed": refused["passed"] and original_rechecked})

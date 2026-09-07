@@ -16,7 +16,7 @@ class CliIntegrationTests(unittest.TestCase):
         environment = dict(os.environ)
         environment["PYTHONPATH"] = str(ROOT / "src")
         return subprocess.run(
-            [sys.executable, *arguments],
+            [sys.executable, *(["-O"] if sys.flags.optimize else []), *arguments],
             cwd=cwd or ROOT,
             env=environment,
             stdout=subprocess.PIPE,

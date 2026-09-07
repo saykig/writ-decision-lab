@@ -54,12 +54,12 @@ def _check_unicode(value: Any, path: str = "$") -> None:
         if any(0xD800 <= ord(char) <= 0xDFFF for char in value):
             _fail("invalid_input", "E_UNICODE_SCALAR", path, "String contains a surrogate code point.")
     elif isinstance(value, list):
-        for index, item in enumerate(value):
-            _check_unicode(item, f"{path}[{index}]")
+        for item in value:
+            _check_unicode(item, path)
     elif isinstance(value, dict):
         for key, item in value.items():
             _check_unicode(key, path)
-            _check_unicode(item, f"{path}.{key}")
+            _check_unicode(item, path)
 
 
 def _depth(value: Any, depth: int = 1) -> int:
@@ -70,16 +70,44 @@ def _depth(value: Any, depth: int = 1) -> int:
     return depth
 
 
+def _preflight_depth(text: str) -> None:
+    """Bound parser recursion without treating quoted delimiters as containers.
+
+    Resource rejection takes precedence once the bound is exceeded. Syntax
+    validation below the bound remains the JSON decoder's responsibility.
+    """
+    depth = 0
+    quoted = False
+    escaped = False
+    for char in text:
+        if quoted:
+            if escaped:
+                escaped = False
+            elif char == "\\":
+                escaped = True
+            elif char == '"':
+                quoted = False
+        elif char == '"':
+            quoted = True
+        elif char in "[{":
+            depth += 1
+            if depth > MAX_JSON_DEPTH:
+                _fail("out_of_scope", "E_JSON_DEPTH", "$", "JSON nesting exceeds 32 levels.")
+        elif char in "]}":
+            depth -= 1
+
+
 def decode_json(data: bytes, *, kind: str) -> Any:
     limit = RESULT_BYTE_LIMIT if kind == "result" else INPUT_BYTE_LIMIT
     if len(data) > limit:
-        _fail("out_of_scope", "E_BYTE_LIMIT", "$", f"{kind} exceeds its byte limit.")
+        _fail("out_of_scope", "E_BYTE_LIMIT", "$", "Input exceeds its byte limit.")
     if data.startswith(b"\xef\xbb\xbf"):
         _fail("invalid_input", "E_UTF8_BOM", "$", "UTF-8 BOM is not permitted.")
     try:
         text = data.decode("utf-8", errors="strict")
     except UnicodeDecodeError:
         _fail("invalid_input", "E_UTF8", "$", "Input is not valid UTF-8.")
+    _preflight_depth(text)
     try:
         value = json.loads(
             text,
@@ -92,12 +120,9 @@ def decode_json(data: bytes, *, kind: str) -> Any:
         raise
     except (json.JSONDecodeError, ValueError, RecursionError):
         _fail("invalid_input", "E_JSON", "$", "Malformed JSON or trailing data.")
-    _check_unicode(value)
-    try:
-        if _depth(value) > MAX_JSON_DEPTH:
-            _fail("out_of_scope", "E_JSON_DEPTH", "$", "JSON nesting exceeds 32 levels.")
-    except RecursionError:
+    if _depth(value) > MAX_JSON_DEPTH:
         _fail("out_of_scope", "E_JSON_DEPTH", "$", "JSON nesting exceeds 32 levels.")
+    _check_unicode(value)
     return value
 
 
@@ -107,9 +132,8 @@ def _object(value: Any, keys: set[str], path: str) -> dict[str, Any]:
     actual = set(value)
     if actual != keys:
         missing = sorted(keys - actual)
-        extra = sorted(actual - keys)
-        if extra:
-            _fail("invalid_input", "E_UNKNOWN_FIELD", path, f"Unknown fields: {','.join(extra)}.")
+        if actual - keys:
+            _fail("invalid_input", "E_UNKNOWN_FIELD", path, "Unknown object field.")
         _fail("invalid_input", "E_REQUIRED_FIELD", path, f"Missing fields: {','.join(missing)}.")
     return value
 
