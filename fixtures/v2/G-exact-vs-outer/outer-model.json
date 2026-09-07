@@ -1,0 +1,1 @@
+{"semantics":"finite-linear-uncertainty.v1","family_kind":"outer_enclosure","family_label":"sound larger enclosure","states":["theta=0","theta=1"],"normalization":"exact_one","equalities":[],"inequalities":[{"label":"outer_upper","coefficients":["0","1"],"rhs":"3/4"},{"label":"outer_lower","coefficients":["0","-1"],"rhs":"-1/4"}]}

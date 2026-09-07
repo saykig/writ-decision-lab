@@ -1,0 +1,1 @@
+{"semantics":"finite-linear-uncertainty.v1","operation":"decision","label":"zero-one prediction after e","actions":[{"label":"predict_0","losses":["0","1"]},{"label":"predict_1","losses":["1","0"]}]}

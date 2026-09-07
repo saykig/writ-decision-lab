@@ -1,0 +1,1 @@
+{"semantics":"finite-linear-uncertainty.v1","family_kind":"exact_family","family_label":"bounded Bernoulli law","states":["theta=0","theta=1"],"normalization":"exact_one","equalities":[],"inequalities":[{"label":"p_theta_1_upper","coefficients":["0","1"],"rhs":"3/4"},{"label":"p_theta_1_lower","coefficients":["0","-1"],"rhs":"-1/4"}]}
