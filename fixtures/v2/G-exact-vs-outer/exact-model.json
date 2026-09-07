@@ -1,0 +1,1 @@
+{"semantics":"finite-linear-uncertainty.v1","family_kind":"exact_family","family_label":"exact fiber","states":["theta=0","theta=1"],"normalization":"exact_one","equalities":[{"label":"exact_half","coefficients":["0","1"],"rhs":"1/2"}],"inequalities":[]}
