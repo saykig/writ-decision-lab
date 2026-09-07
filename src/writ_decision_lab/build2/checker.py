@@ -9,7 +9,7 @@ from types import MappingProxyType
 from typing import Any
 
 from .errors import CheckError, InputError
-from .exact import fraction_text, rational, require_keys
+from .exact import fraction_text, rational, require_keys, validate_json_depth
 from .model import Problem, Query, decode_problem, decode_query
 
 
@@ -21,6 +21,34 @@ class CheckedResult:
     model_sha256: str
     query_sha256: str
     conclusion: MappingProxyType
+
+
+UNRESOLVED_REASONS = {
+    "compatibility": frozenset({
+        "backend_exception",
+        "candidate_evidence_failed_exact_check",
+        "absent_exact_infeasibility_certificate",
+    }),
+    "linear_range": frozenset({
+        "backend_exception",
+        "candidate_evidence_failed_exact_check",
+        "absent_exact_infeasibility_certificate",
+        "absent_exact_endpoint_certificate",
+    }),
+    "decision": frozenset({
+        "backend_exception",
+        "candidate_evidence_failed_exact_check",
+        "absent_exact_infeasibility_certificate",
+        "absent_exact_action_certificate",
+    }),
+    "conditional_range": frozenset({
+        "backend_exception",
+        "candidate_evidence_failed_exact_check",
+        "absent_exact_infeasibility_certificate",
+        "conditioning_event_impossible",
+        "conditional_profile_deferred",
+    }),
+}
 
 
 def _frac(value: Any, where: str) -> Fraction:
@@ -105,12 +133,13 @@ def _freeze(value: Any) -> Any:
     return value
 
 
-def check(bundle: dict, problem_raw: bytes, query_raw: bytes) -> CheckedResult:
+def _check(bundle: dict, problem_raw: bytes, query_raw: bytes) -> CheckedResult:
     if not isinstance(bundle, dict):
         raise CheckError("bundle_must_be_object")
     required = {"schema", "operation", "model_sha256", "query_sha256", "family_kind", "backend", "status", "evidence"}
     optional = {"reason"}
     try:
+        validate_json_depth(bundle)
         require_keys(bundle, required, optional)
         problem = decode_problem(problem_raw)
         query = decode_query(query_raw, problem.dimension)
@@ -131,6 +160,8 @@ def check(bundle: dict, problem_raw: bytes, query_raw: bytes) -> CheckedResult:
     if status == "unresolved":
         if set(bundle) != required | {"reason"} or not isinstance(bundle["reason"], str) or evidence:
             raise CheckError("invalid_unresolved_bundle")
+        if bundle["reason"] not in UNRESOLVED_REASONS[query.operation]:
+            raise CheckError("invalid_unresolved_reason")
         conclusion = {"reason": bundle["reason"]}
     elif status == "compatible" and query.operation == "compatibility":
         require_keys(evidence, {"witness"})
@@ -219,3 +250,12 @@ def check(bundle: dict, problem_raw: bytes, query_raw: bytes) -> CheckedResult:
 
     return CheckedResult(query.operation, status if status != "decision_candidate" else conclusion["decision_status"], problem.family_kind, model_hash, query_hash, _freeze(conclusion))
 
+
+def check(bundle: dict, problem_raw: bytes, query_raw: bytes) -> CheckedResult:
+    """Check an untrusted result while exposing only controlled diagnostics."""
+    try:
+        return _check(bundle, problem_raw, query_raw)
+    except CheckError:
+        raise
+    except Exception as exc:
+        raise CheckError("invalid_result_bundle") from exc
