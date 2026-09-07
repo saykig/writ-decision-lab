@@ -20,10 +20,16 @@ from writ_decision_lab.build2.checker import check
 from writ_decision_lab.build2.consumer import consume
 from writ_decision_lab.build2.engine import produce, solve_and_check
 from writ_decision_lab.build2.errors import CheckError, InputError
+from writ_decision_lab.build2.exact import MAX_JSON_DEPTH, loads_strict
 
 
 def raw(path):
     return (ROOT / path).read_bytes()
+
+
+def child_argv(*args, inherit_optimization=True):
+    optimization = ["-" + "O" * sys.flags.optimize] if inherit_optimization and sys.flags.optimize else []
+    return [sys.executable, *optimization, *args]
 
 
 class PositiveFixtures(unittest.TestCase):
@@ -116,6 +122,21 @@ class StrictInputTests(unittest.TestCase):
     def test_missing_normalization_rejected(self):
         with self.assertRaises(InputError):
             produce(self.model.replace(b'"exact_one"', b'"implicit"'), self.query)
+
+    def test_json_depth_boundary_and_hostile_inputs_are_controlled(self):
+        def nested(depth):
+            return (b'{"x":' + b'[' * (depth - 1) + b'0' + b']' * (depth - 1) + b'}')
+
+        for depth in (MAX_JSON_DEPTH - 1, MAX_JSON_DEPTH):
+            self.assertIsInstance(loads_strict(nested(depth)), dict)
+        for depth in (MAX_JSON_DEPTH + 1, 2000):
+            with self.assertRaisesRegex(InputError, "json_depth_limit") as caught:
+                loads_strict(nested(depth))
+            self.assertNotIsInstance(caught.exception, RecursionError)
+            for model, query in ((nested(depth), self.query), (self.model, nested(depth))):
+                with self.assertRaises(InputError) as decoded:
+                    produce(model, query)
+                self.assertNotIsInstance(decoded.exception, RecursionError)
 
 
 class HostileBundleTests(unittest.TestCase):
@@ -219,6 +240,91 @@ class FailureAndConsumerTests(unittest.TestCase):
         self.assertEqual("candidate_evidence_failed_exact_check", bundle["reason"])
         self.assertEqual("unresolved", checked.status)
 
+    def test_every_malformed_backend_shape_downgrades_to_checked_unresolved(self):
+        malformed = (
+            None,
+            [],
+            {"status": "invented"},
+            {"schema": "finite-linear-uncertainty-result.v1", "status": "unresolved"},
+        )
+        for payload in malformed:
+            with self.subTest(payload=payload):
+                bundle, checked = solve_and_check(
+                    self.model, self.query, search=lambda *_args, value=payload: value
+                )
+                self.assertEqual("candidate_evidence_failed_exact_check", bundle["reason"])
+                self.assertEqual("unresolved", checked.status)
+
+    def test_invalid_certificate_values_and_structures_do_not_leak_validation_errors(self):
+        real = backend.search
+        mutations = (
+            lambda bundle: bundle["evidence"].__setitem__("minimum", []),
+            lambda bundle: bundle["evidence"]["minimum"].__setitem__("objective", "2/4"),
+            lambda bundle: bundle.__setitem__("status", ["partially_identified"]),
+        )
+        for mutate in mutations:
+            def forged(*args, mutate=mutate):
+                bundle = real(*args)
+                mutate(bundle)
+                return bundle
+            with self.subTest(mutate=mutate):
+                fallback, checked = solve_and_check(self.model, self.query, search=forged)
+                self.assertEqual("candidate_evidence_failed_exact_check", fallback["reason"])
+                self.assertEqual("unresolved", checked.status)
+
+    def test_unresolved_reason_codes_are_closed_and_operation_specific(self):
+        def unresolved(reason):
+            def search(problem_raw, query_raw, problem, query):
+                from writ_decision_lab.build2.engine import _unresolved
+                return _unresolved(problem_raw, query_raw, problem, query, reason)
+            return search
+
+        cases = (
+            (raw("fixtures/v2/A-triangle/model.json"), raw("fixtures/v2/A-triangle/query.json"), "absent_exact_infeasibility_certificate", "absent_exact_endpoint_certificate"),
+            (self.model, self.query, "absent_exact_endpoint_certificate", "absent_exact_action_certificate"),
+            (raw("fixtures/v2/E-integrated/posterior-model.json"), raw("fixtures/v2/E-integrated/decision-query.json"), "absent_exact_action_certificate", "conditioning_event_impossible"),
+            (self.model, raw("fixtures/v2/H-unresolved/impossible-conditional-query.json"), "conditioning_event_impossible", "absent_exact_action_certificate"),
+        )
+        for model, query, valid_reason, wrong_reason in cases:
+            with self.subTest(valid_reason=valid_reason):
+                _, checked = solve_and_check(model, query, search=unresolved(valid_reason))
+                self.assertEqual(valid_reason, checked.conclusion["reason"])
+            for hostile in (wrong_reason, "backend said: secret details"):
+                bundle, result = solve_and_check(model, query, search=unresolved(hostile))
+                self.assertEqual("candidate_evidence_failed_exact_check", bundle["reason"])
+                self.assertEqual("candidate_evidence_failed_exact_check", result.conclusion["reason"])
+                self.assertNotIn(hostile, repr(result.conclusion))
+
+    def test_deep_backend_result_is_controlled_without_recursion_error(self):
+        real = backend.search
+        def hostile(*args):
+            bundle = real(*args)
+            value = "untrusted backend text"
+            for _ in range(2000):
+                value = [value]
+            bundle["evidence"] = value
+            return bundle
+        fallback, checked = solve_and_check(self.model, self.query, search=hostile)
+        self.assertEqual("candidate_evidence_failed_exact_check", fallback["reason"])
+        self.assertEqual("unresolved", checked.status)
+        self.assertNotIn("untrusted", repr(checked.conclusion))
+
+    def test_cyclic_backend_result_is_controlled_without_text_laundering(self):
+        for cyclic in ({}, []):
+            if isinstance(cyclic, dict):
+                cyclic["backend secret"] = cyclic
+            else:
+                cyclic.append(cyclic)
+
+            def hostile(*_args, cyclic=cyclic):
+                return cyclic
+
+            with self.subTest(container=type(cyclic).__name__):
+                fallback, checked = solve_and_check(self.model, self.query, search=hostile)
+                self.assertEqual("candidate_evidence_failed_exact_check", fallback["reason"])
+                self.assertEqual("unresolved", checked.status)
+                self.assertNotIn("backend secret", repr(checked.conclusion))
+
     def test_consumer_freshly_checks(self):
         bundle, _ = solve_and_check(self.model, self.query)
         display = consume(bundle, self.model, self.query)
@@ -287,7 +393,7 @@ class BaselineAndReproducibilityTests(unittest.TestCase):
             target = Path(directory) / "relocated"
             shutil.copytree(ROOT, target, ignore=shutil.ignore_patterns("__pycache__", ".pytest_cache"))
             result = subprocess.run(
-                [sys.executable, "examples/build2/change_and_recheck.py"],
+                child_argv("examples/build2/change_and_recheck.py"),
                 cwd=target,
                 env={"PYTHONPATH": str(target / "src")},
                 text=True,
@@ -296,9 +402,25 @@ class BaselineAndReproducibilityTests(unittest.TestCase):
             self.assertEqual(0, result.returncode, result.stderr)
             self.assertIn('"stale_reuse_refused": true', result.stdout)
 
+    def test_subprocess_optimization_flag_propagation_and_normal_control(self):
+        inherited = subprocess.run(
+            child_argv("-c", "import sys; print(sys.flags.optimize)"),
+            text=True,
+            capture_output=True,
+        )
+        self.assertEqual(0, inherited.returncode, inherited.stderr)
+        self.assertEqual(sys.flags.optimize, int(inherited.stdout))
+        normal = subprocess.run(
+            child_argv("-c", "import sys; print(sys.flags.optimize)", inherit_optimization=False),
+            text=True,
+            capture_output=True,
+        )
+        self.assertEqual(0, normal.returncode, normal.stderr)
+        self.assertEqual(0, int(normal.stdout))
+
     def test_checker_import_does_not_load_scipy_backend(self):
         result = subprocess.run(
-            [sys.executable, "-c", "import sys; from writ_decision_lab.build2.checker import check; print('scipy' in sys.modules)"],
+            child_argv("-c", "import sys; from writ_decision_lab.build2.checker import check; print('scipy' in sys.modules)"),
             cwd=ROOT,
             env={"PYTHONPATH": str(ROOT / "src")},
             text=True,
