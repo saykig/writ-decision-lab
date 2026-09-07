@@ -1,0 +1,9 @@
+M	SPEC.md
+M	comparison/run_sequence.py
+M	src/writ_decision_lab/consumer.py
+M	src/writ_decision_lab/decode.py
+M	src/writ_decision_lab/identity.py
+M	src/writ_decision_lab/types.py
+M	tests/test_cli.py
+M	tests/test_comparison.py
+A	tests/test_pr1_repairs.py

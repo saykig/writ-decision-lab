@@ -1,0 +1,111 @@
+{
+  "original": "cd8016eda9ccf17ccda4cdb2c37b22f72660bf76",
+  "current": "36b9bbf7dc3f92a647d9e6a341aa7334e0610cbd",
+  "runtime": "3.13.15 (main, Aug  5 2026, 12:25:43) [Clang 21.0.0 (clang-2100.1.1.101)]",
+  "old_source_digest": "sha256:2ff46c7ae832a8b51d6bb038c3e324d7295950b820f3a9a5528e3ed2dc560431",
+  "new_source_digest": "sha256:ed908ab025455918f41a80fd8689256486572a33255593c417fc7bf735dd74dd",
+  "checks": [
+    {
+      "fixture": "D01-minimum",
+      "identical_except_producer_source_hash": true,
+      "status": "checked",
+      "policy_count": 1
+    },
+    {
+      "fixture": "D02-negative-loss",
+      "identical_except_producer_source_hash": true,
+      "status": "checked",
+      "policy_count": 2
+    },
+    {
+      "fixture": "D03-cost-over-evsi",
+      "identical_except_producer_source_hash": true,
+      "status": "checked",
+      "policy_count": 4
+    },
+    {
+      "fixture": "D04-policy-limit",
+      "identical_except_producer_source_hash": true,
+      "status": "checked",
+      "policy_count": 4096
+    },
+    {
+      "fixture": "F01-weak",
+      "identical_except_producer_source_hash": true,
+      "status": "checked",
+      "policy_count": 4
+    },
+    {
+      "fixture": "F02-perfect",
+      "identical_except_producer_source_hash": true,
+      "status": "checked",
+      "policy_count": 4
+    },
+    {
+      "fixture": "F03-no-signal-unit",
+      "identical_except_producer_source_hash": true,
+      "status": "checked",
+      "policy_count": 4
+    },
+    {
+      "fixture": "F04-no-signal-asymmetric",
+      "identical_except_producer_source_hash": true,
+      "status": "checked",
+      "policy_count": 4
+    },
+    {
+      "fixture": "F05-revised-unit",
+      "identical_except_producer_source_hash": true,
+      "status": "checked",
+      "policy_count": 4
+    },
+    {
+      "fixture": "F06-revised-asymmetric",
+      "identical_except_producer_source_hash": true,
+      "status": "checked",
+      "policy_count": 4
+    },
+    {
+      "fixture": "F07-real-tie",
+      "identical_except_producer_source_hash": true,
+      "status": "checked",
+      "policy_count": 4
+    },
+    {
+      "fixture": "F08-zero-prior",
+      "identical_except_producer_source_hash": true,
+      "status": "checked",
+      "policy_count": 4
+    },
+    {
+      "fixture": "F09-exactness",
+      "identical_except_producer_source_hash": true,
+      "status": "checked",
+      "policy_count": 4
+    },
+    {
+      "fixture": "F10-acquisition-tie",
+      "identical_except_producer_source_hash": true,
+      "status": "checked",
+      "policy_count": 4
+    },
+    {
+      "fixture": "F11-three-state",
+      "identical_except_producer_source_hash": true,
+      "status": "checked",
+      "policy_count": 27
+    },
+    {
+      "fixture": "F12-restricted-actions",
+      "identical_except_producer_source_hash": true,
+      "status": "checked",
+      "policy_count": 1
+    }
+  ],
+  "command": [
+    "/opt/homebrew/opt/python@3.13/bin/python3.13",
+    "-c",
+    "import json,sys\nfrom pathlib import Path\nfrom writ_decision_lab import solve_bytes,check_bytes\nout={}\nfor d in sorted(Path('fixtures/v1').iterdir()):\n m=(d/'model.json').read_bytes();q=(d/'query.json').read_bytes();r=solve_bytes(m,q);c=check_bytes(m,q,r)\n out[d.name]={'result':json.loads(r),'status':c.status,'policies':c.policy_count}\nprint(json.dumps(out,sort_keys=True))\n"
+  ],
+  "note": "New fixed-fixture compatibility execution; not original reviewer replay. Existing 16 fixtures only."
+}

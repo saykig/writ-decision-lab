@@ -1,0 +1,135 @@
+{
+  "scope": "/Users/kimchee/Documents/writ-decision-lab-build1 working files and all locally reachable Git path history",
+  "names": [
+    "review_probe.py",
+    "extra_probes.py",
+    "reviewer_probes.py",
+    "RUN_THIS_NEXT_WRIT_BUILD_1_EXECUTE_AND_CHALLENGE.md",
+    "reviewer_probes",
+    "source_verification.json",
+    "observations"
+  ],
+  "matches": [],
+  "references": [
+    {
+      "path": "sources/RUN_THIS_NEXT_WRIT_ENGINEERING_BUILD_1.md",
+      "line": 112,
+      "text": "Support 1\u20138 states, 1\u20138 actions, and 1\u20136 observations, additionally requiring `len(A) ** len(X) <= 4096`. These are transparent operational limits for this first checker, not mathematical limits on the theory."
+    },
+    {
+      "path": "sources/RUN_THIS_NEXT_WRIT_ENGINEERING_BUILD_1.md",
+      "line": 284,
+      "text": "Compute prior risks, posterior distributions for positive-mass observations, conditional risks, and their weighted minima. Derive EVSI and acquisition choice through \u00a73. Keep exact arithmetic throughout."
+    },
+    {
+      "path": "sources/RUN_THIS_NEXT_WRIT_ENGINEERING_BUILD_1.md",
+      "line": 365,
+      "text": "| F07 real-tie | `p=1/2`, `k=(1/2,1/2)` | Possible observations; both terminal actions minimize at every branch. |"
+    },
+    {
+      "path": "sources/writ_engineering_direction.md",
+      "line": 48,
+      "text": "| Impossible versus tied observations | Zero-mass branches had no posterior/action answer; possible ties retained both actions. | Observed on fixed fixtures, not all inputs. |"
+    },
+    {
+      "path": "sources/pr1-repair/review-a.md",
+      "line": 35,
+      "text": "| Additional review probes | 15 named groups, including defects and positive controls | Both `reviewer_probes_*.json` files |"
+    },
+    {
+      "path": "sources/pr1-repair/review-a.md",
+      "line": 203,
+      "text": "- Runtime and test source: verified Git blob IDs in `source_verification.json`."
+    },
+    {
+      "path": "sources/pr1-repair/review-a.md",
+      "line": 206,
+      "text": "- Reviewer execution: accompanying `reviewer_probes.py`, JSON evidence, original-suite logs, and comparison rerun. Source reconstruction and fixture regeneration are disclosed above."
+    },
+    {
+      "path": "sources/pr1-repair/repair-packet-b.md",
+      "line": 13,
+      "text": "Retain the finite one-observation model, exact rational quantities, complete minimizing sets, impossible-event nulls, intended-input byte binding, and separate mathematical checking. Do not reopen KL5/KL6, design KL7, introduce repeated observations, build cumulative infrastructure, add war data, or make this a Writ integration task."
+    },
+    {
+      "path": "sources/pr1-repair/repair-packet-b.md",
+      "line": 19,
+      "text": "On the untouched reviewed source, run `review_probe.py` and `extra_probes.py` normally and under `python -O`, plus the original repository test suite. Use fresh output paths. Save the observed results, runtime, and source/commit identities."
+    },
+    {
+      "path": "sources/pr1-repair/repair-packet-b.md",
+      "line": 21,
+      "text": "The review probes intentionally demonstrate current defects. Do not change their recorded observations to manufacture agreement with desired behavior. Turn the relevant reproductions into normal regression tests with the desired assertions for the repaired implementation."
+    },
+    {
+      "path": "sources/pr1-repair/review-b.md",
+      "line": 30,
+      "text": "Review runtime: **CPython 3.13.5**. The implementer reported **3.13.15**. Both are permitted patches in the original Build 1 specification. The review probes were executed under ordinary Python and `python -O`; their observations agreed apart from the recorded optimization flag. Child-process probes explicitly propagated `-O`."
+    },
+    {
+      "path": "sources/pr1-repair/review-b.md",
+      "line": 161,
+      "text": "The committed report says that the outer `RUN_THIS_NEXT_WRIT_BUILD_1_EXECUTE_AND_CHALLENGE.md` file was unavailable as a separate attachment. It reports implementing the inner packet and the visible instructions. That is a disclosed limitation, not evidence of dishonesty."
+    },
+    {
+      "path": "sources/pr1-repair/review-b.md",
+      "line": 169,
+      "text": "Finally, the original subprocess tests construct child commands with `sys.executable` without passing `-O`. A parent suite run under `python -O` does not itself establish that those child processes used optimized mode. This review explicitly propagated the flag; ordinary and optimized review observations matched. The repository's own tests should do so when claiming child-process optimized coverage."
+    },
+    {
+      "path": "sources/pr1-repair/review-b.md",
+      "line": 207,
+      "text": "python review_probe.py --repo /path/to/writ-decision-lab --output observations.json"
+    },
+    {
+      "path": "sources/pr1-repair/review-b.md",
+      "line": 208,
+      "text": "python -O review_probe.py --repo /path/to/writ-decision-lab --output observations-opt.json"
+    },
+    {
+      "path": "sources/pr1-repair/review-b.md",
+      "line": 209,
+      "text": "python extra_probes.py /path/to/writ-decision-lab extra.json"
+    },
+    {
+      "path": "sources/pr1-repair/review-b.md",
+      "line": 210,
+      "text": "python -O extra_probes.py /path/to/writ-decision-lab extra-opt.json"
+    },
+    {
+      "path": "sources/pr1-repair/review-b.md",
+      "line": 213,
+      "text": "`review_probe.py` verifies its 12 executed source files against pinned Git blob IDs and refuses changed versions. `extra_probes.py` assumes the same checkout was already verified. Both scripts create only explicit observation outputs and disposable temporary files. The defect observations deliberately record current failures; they are not a replacement for post-repair regressions with the desired behavior."
+    },
+    {
+      "path": "sources/pr1-repair/review-b.md",
+      "line": 215,
+      "text": "The bundle includes the actual normal/optimized JSON observations. The code snapshot is not included; use the user's repository."
+    },
+    {
+      "path": "PR1_REPAIR_REPORT.md",
+      "line": 18,
+      "text": "reviewer observations are inherited evidence until reproduced, not instructions to change scope."
+    },
+    {
+      "path": "PR1_REPAIR_REPORT.md",
+      "line": 120,
+      "text": "- **Inherited/source-reported:** reviewers' 12/16/48 reference-case counts and GitHub/host observations;"
+    },
+    {
+      "path": "PR1_REPAIR_REPORT.md",
+      "line": 129,
+      "text": "- **Unavailable / not run:** exact `review_probe.py`, `extra_probes.py`, `reviewer_probes.py`, and their"
+    },
+    {
+      "path": "BUILD_1_REPORT.md",
+      "line": 224,
+      "text": "- The user-referenced outer filename `RUN_THIS_NEXT_WRIT_BUILD_1_EXECUTE_AND_CHALLENGE.md` was not"
+    },
+    {
+      "path": "PR1_CHALLENGE_MATRIX.md",
+      "line": 39,
+      "text": "| Reviewer fixed-seed integer oracles / external source reconstruction claims | Inherited review observations, not necessary to change mathematics; not repeated as a new experiment | NOT RUN |"
+    }
+  ]
+}

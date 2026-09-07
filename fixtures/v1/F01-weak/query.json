@@ -1,0 +1,1 @@
+{"actions":["a0","a1"],"cost":"0/1","loss_unit":"loss-unit","losses":[["0/1","1/1"],["1/1","0/1"]],"schema":"wdl.query.v1","semantics":"finite-one-observation.v1","state_order":["s0","s1"]}

@@ -1,0 +1,25 @@
+{
+  "head": "36b9bbf7dc3f92a647d9e6a341aa7334e0610cbd",
+  "git_status": "",
+  "tracked_files_rechecked": 112,
+  "archive_commit": "36b9bbf7dc3f92a647d9e6a341aa7334e0610cbd",
+  "tracked_archive_sha256": "1375a96203fb697713eac6d87da314d1262e34bd3d6e3b077bed3fd3bdd8dbab",
+  "complete_suites": [
+    {
+      "mode": "normal",
+      "tests": 60,
+      "audited_children": 50,
+      "independent_groups": 7
+    },
+    {
+      "mode": "optimized",
+      "tests": 60,
+      "audited_children": 50,
+      "independent_groups": 7
+    }
+  ],
+  "new_artifacts_equal_between_modes_relocations_and_repair_evidence": true,
+  "report_in_prior_commit": false,
+  "historical_replay": "NOT RUN",
+  "unseen_directive_completeness": "NOT ESTABLISHED"
+}

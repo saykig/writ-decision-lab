@@ -1,0 +1,876 @@
+{
+  "runtime": "3.13.15 (main, Aug  5 2026, 12:25:43) [Clang 21.0.0 (clang-2100.1.1.101)]",
+  "optimize": 1,
+  "testsRun": 60,
+  "failures": 0,
+  "errors": 0,
+  "subprocesses": [
+    {
+      "executable": "/opt/homebrew/opt/python@3.13/bin/python3.13",
+      "argv": [
+        "/opt/homebrew/opt/python@3.13/bin/python3.13",
+        "-O",
+        "/Users/kimchee/Documents/writ-decision-lab-build1/examples/consume_answer.py",
+        "--expected-model",
+        "/Users/kimchee/Documents/writ-decision-lab-build1/examples/weak/model.json",
+        "--expected-query",
+        "/Users/kimchee/Documents/writ-decision-lab-build1/examples/weak/query.json",
+        "--result",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpcifkcjxb/tampered.json",
+        "--output",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpcifkcjxb/consumer.json"
+      ],
+      "cwd": "/Users/kimchee/Documents/writ-decision-lab-build1"
+    },
+    {
+      "executable": "/opt/homebrew/opt/python@3.13/bin/python3.13",
+      "argv": [
+        "/opt/homebrew/opt/python@3.13/bin/python3.13",
+        "-O",
+        "-m",
+        "writ_decision_lab",
+        "check",
+        "--model",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmp4sjuzael/missing-model.json",
+        "--query",
+        "/Users/kimchee/Documents/writ-decision-lab-build1/examples/weak/query.json",
+        "--result",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmp4sjuzael/result.json",
+        "--output",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmp4sjuzael/check.json"
+      ],
+      "cwd": "/Users/kimchee/Documents/writ-decision-lab-build1"
+    },
+    {
+      "executable": "/opt/homebrew/opt/python@3.13/bin/python3.13",
+      "argv": [
+        "/opt/homebrew/opt/python@3.13/bin/python3.13",
+        "-O",
+        "-m",
+        "writ_decision_lab",
+        "solve",
+        "--model",
+        "/Users/kimchee/Documents/writ-decision-lab-build1/examples/weak/model.json",
+        "--query",
+        "/Users/kimchee/Documents/writ-decision-lab-build1/examples/weak/query.json",
+        "--output",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpl5973m16/result.json"
+      ],
+      "cwd": "/Users/kimchee/Documents/writ-decision-lab-build1"
+    },
+    {
+      "executable": "/opt/homebrew/opt/python@3.13/bin/python3.13",
+      "argv": [
+        "/opt/homebrew/opt/python@3.13/bin/python3.13",
+        "-O",
+        "-m",
+        "writ_decision_lab",
+        "solve",
+        "--model",
+        "/Users/kimchee/Documents/writ-decision-lab-build1/examples/weak/model.json",
+        "--query",
+        "/Users/kimchee/Documents/writ-decision-lab-build1/examples/weak/query.json",
+        "--output",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpytswh5ef/run/result.json"
+      ],
+      "cwd": "/Users/kimchee/Documents/writ-decision-lab-build1"
+    },
+    {
+      "executable": "/opt/homebrew/opt/python@3.13/bin/python3.13",
+      "argv": [
+        "/opt/homebrew/opt/python@3.13/bin/python3.13",
+        "-O",
+        "-m",
+        "writ_decision_lab",
+        "check",
+        "--model",
+        "/Users/kimchee/Documents/writ-decision-lab-build1/examples/weak/model.json",
+        "--query",
+        "/Users/kimchee/Documents/writ-decision-lab-build1/examples/weak/query.json",
+        "--result",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpytswh5ef/run/result.json",
+        "--output",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpytswh5ef/run/check.json"
+      ],
+      "cwd": "/Users/kimchee/Documents/writ-decision-lab-build1"
+    },
+    {
+      "executable": "/opt/homebrew/opt/python@3.13/bin/python3.13",
+      "argv": [
+        "/opt/homebrew/opt/python@3.13/bin/python3.13",
+        "-O",
+        "/Users/kimchee/Documents/writ-decision-lab-build1/examples/consume_answer.py",
+        "--expected-model",
+        "/Users/kimchee/Documents/writ-decision-lab-build1/examples/weak/model.json",
+        "--expected-query",
+        "/Users/kimchee/Documents/writ-decision-lab-build1/examples/weak/query.json",
+        "--result",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpytswh5ef/run/result.json",
+        "--output",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpytswh5ef/run/consumer.json"
+      ],
+      "cwd": "/Users/kimchee/Documents/writ-decision-lab-build1"
+    },
+    {
+      "executable": "/opt/homebrew/opt/python@3.13/bin/python3.13",
+      "argv": [
+        "/opt/homebrew/opt/python@3.13/bin/python3.13",
+        "-O",
+        "-m",
+        "writ_decision_lab",
+        "solve",
+        "--model",
+        "/Users/kimchee/Documents/writ-decision-lab-build1/examples/weak/model.json",
+        "--query",
+        "/Users/kimchee/Documents/writ-decision-lab-build1/examples/weak/query.json",
+        "--output",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpqrcd27n2/run/result.json"
+      ],
+      "cwd": "/Users/kimchee/Documents/writ-decision-lab-build1"
+    },
+    {
+      "executable": "/opt/homebrew/opt/python@3.13/bin/python3.13",
+      "argv": [
+        "/opt/homebrew/opt/python@3.13/bin/python3.13",
+        "-O",
+        "-m",
+        "writ_decision_lab",
+        "check",
+        "--model",
+        "/Users/kimchee/Documents/writ-decision-lab-build1/examples/weak/model.json",
+        "--query",
+        "/Users/kimchee/Documents/writ-decision-lab-build1/examples/weak/query.json",
+        "--result",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpqrcd27n2/run/result.json",
+        "--output",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpqrcd27n2/run/check.json"
+      ],
+      "cwd": "/Users/kimchee/Documents/writ-decision-lab-build1"
+    },
+    {
+      "executable": "/opt/homebrew/opt/python@3.13/bin/python3.13",
+      "argv": [
+        "/opt/homebrew/opt/python@3.13/bin/python3.13",
+        "-O",
+        "/Users/kimchee/Documents/writ-decision-lab-build1/examples/consume_answer.py",
+        "--expected-model",
+        "/Users/kimchee/Documents/writ-decision-lab-build1/examples/weak/model.json",
+        "--expected-query",
+        "/Users/kimchee/Documents/writ-decision-lab-build1/examples/weak/query.json",
+        "--result",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpqrcd27n2/run/result.json",
+        "--output",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpqrcd27n2/run/consumer.json"
+      ],
+      "cwd": "/Users/kimchee/Documents/writ-decision-lab-build1"
+    },
+    {
+      "executable": "/opt/homebrew/opt/python@3.13/bin/python3.13",
+      "argv": [
+        "/opt/homebrew/opt/python@3.13/bin/python3.13",
+        "-O",
+        "-m",
+        "writ_decision_lab",
+        "solve",
+        "--model",
+        "/Users/kimchee/Documents/writ-decision-lab-build1/examples/weak/model.json",
+        "--query",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpdxb_pqgv/query.json",
+        "--output",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpdxb_pqgv/result.json"
+      ],
+      "cwd": "/Users/kimchee/Documents/writ-decision-lab-build1"
+    },
+    {
+      "executable": "/opt/homebrew/opt/python@3.13/bin/python3.13",
+      "argv": [
+        "/opt/homebrew/opt/python@3.13/bin/python3.13",
+        "-O",
+        "/Users/kimchee/Documents/writ-decision-lab-build1/comparison/run_sequence.py",
+        "--output",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpfa2naxk1/comparison.json"
+      ],
+      "cwd": "/Users/kimchee/Documents/writ-decision-lab-build1"
+    },
+    {
+      "executable": "/opt/homebrew/opt/python@3.13/bin/python3.13",
+      "argv": [
+        "/opt/homebrew/opt/python@3.13/bin/python3.13",
+        "-O",
+        "-m",
+        "writ_decision_lab",
+        "check",
+        "--model",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpqvpb69ku/m",
+        "--query",
+        "/Users/kimchee/Documents/writ-decision-lab-build1/examples/weak/query.json",
+        "--result",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpqvpb69ku/r",
+        "--output",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpqvpb69ku/check"
+      ],
+      "cwd": "/Users/kimchee/Documents/writ-decision-lab-build1"
+    },
+    {
+      "executable": "/opt/homebrew/opt/python@3.13/bin/python3.13",
+      "argv": [
+        "/opt/homebrew/opt/python@3.13/bin/python3.13",
+        "-O",
+        "-m",
+        "writ_decision_lab",
+        "check",
+        "--model",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpmu800l3x/m",
+        "--query",
+        "/Users/kimchee/Documents/writ-decision-lab-build1/examples/weak/query.json",
+        "--result",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpmu800l3x/r",
+        "--output",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpmu800l3x/check"
+      ],
+      "cwd": "/Users/kimchee/Documents/writ-decision-lab-build1"
+    },
+    {
+      "executable": "/opt/homebrew/opt/python@3.13/bin/python3.13",
+      "argv": [
+        "/opt/homebrew/opt/python@3.13/bin/python3.13",
+        "-O",
+        "-m",
+        "writ_decision_lab",
+        "check",
+        "--model",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmp3huvkz8m/m",
+        "--query",
+        "/Users/kimchee/Documents/writ-decision-lab-build1/examples/weak/query.json",
+        "--result",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmp3huvkz8m/r",
+        "--output",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmp3huvkz8m/check"
+      ],
+      "cwd": "/Users/kimchee/Documents/writ-decision-lab-build1"
+    },
+    {
+      "executable": "/opt/homebrew/opt/python@3.13/bin/python3.13",
+      "argv": [
+        "/opt/homebrew/opt/python@3.13/bin/python3.13",
+        "-O",
+        "-m",
+        "writ_decision_lab",
+        "check",
+        "--model",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmp1ohxk98w/m",
+        "--query",
+        "/Users/kimchee/Documents/writ-decision-lab-build1/examples/weak/query.json",
+        "--result",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmp1ohxk98w/r",
+        "--output",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmp1ohxk98w/check"
+      ],
+      "cwd": "/Users/kimchee/Documents/writ-decision-lab-build1"
+    },
+    {
+      "executable": "/opt/homebrew/opt/python@3.13/bin/python3.13",
+      "argv": [
+        "/opt/homebrew/opt/python@3.13/bin/python3.13",
+        "-O",
+        "-m",
+        "writ_decision_lab",
+        "check",
+        "--model",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpemeuwt4m/m",
+        "--query",
+        "/Users/kimchee/Documents/writ-decision-lab-build1/examples/weak/query.json",
+        "--result",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpemeuwt4m/r",
+        "--output",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpemeuwt4m/check"
+      ],
+      "cwd": "/Users/kimchee/Documents/writ-decision-lab-build1"
+    },
+    {
+      "executable": "/opt/homebrew/opt/python@3.13/bin/python3.13",
+      "argv": [
+        "/opt/homebrew/opt/python@3.13/bin/python3.13",
+        "-O",
+        "-m",
+        "writ_decision_lab",
+        "check",
+        "--model",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpl9fhj0n9/m",
+        "--query",
+        "/Users/kimchee/Documents/writ-decision-lab-build1/examples/weak/query.json",
+        "--result",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpl9fhj0n9/r",
+        "--output",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpl9fhj0n9/check"
+      ],
+      "cwd": "/Users/kimchee/Documents/writ-decision-lab-build1"
+    },
+    {
+      "executable": "/opt/homebrew/opt/python@3.13/bin/python3.13",
+      "argv": [
+        "/opt/homebrew/opt/python@3.13/bin/python3.13",
+        "-O",
+        "-m",
+        "writ_decision_lab",
+        "check",
+        "--model",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmplys9g4e5/m",
+        "--query",
+        "/Users/kimchee/Documents/writ-decision-lab-build1/examples/weak/query.json",
+        "--result",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmplys9g4e5/r",
+        "--output",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmplys9g4e5/check"
+      ],
+      "cwd": "/Users/kimchee/Documents/writ-decision-lab-build1"
+    },
+    {
+      "executable": "/opt/homebrew/opt/python@3.13/bin/python3.13",
+      "argv": [
+        "/opt/homebrew/opt/python@3.13/bin/python3.13",
+        "-O",
+        "-m",
+        "writ_decision_lab",
+        "check",
+        "--model",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmp56a1bxoc/m",
+        "--query",
+        "/Users/kimchee/Documents/writ-decision-lab-build1/examples/weak/query.json",
+        "--result",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmp56a1bxoc/r",
+        "--output",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmp56a1bxoc/check"
+      ],
+      "cwd": "/Users/kimchee/Documents/writ-decision-lab-build1"
+    },
+    {
+      "executable": "/opt/homebrew/opt/python@3.13/bin/python3.13",
+      "argv": [
+        "/opt/homebrew/opt/python@3.13/bin/python3.13",
+        "-O",
+        "-m",
+        "writ_decision_lab",
+        "check",
+        "--model",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpaxei3qbx/m",
+        "--query",
+        "/Users/kimchee/Documents/writ-decision-lab-build1/examples/weak/query.json",
+        "--result",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpaxei3qbx/r",
+        "--output",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpaxei3qbx/check"
+      ],
+      "cwd": "/Users/kimchee/Documents/writ-decision-lab-build1"
+    },
+    {
+      "executable": "/opt/homebrew/opt/python@3.13/bin/python3.13",
+      "argv": [
+        "/opt/homebrew/opt/python@3.13/bin/python3.13",
+        "-O",
+        "-m",
+        "writ_decision_lab",
+        "check",
+        "--model",
+        "/Users/kimchee/Documents/writ-decision-lab-build1/examples/weak/model.json",
+        "--query",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpcmanvbsh/q",
+        "--result",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpcmanvbsh/r",
+        "--output",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpcmanvbsh/check"
+      ],
+      "cwd": "/Users/kimchee/Documents/writ-decision-lab-build1"
+    },
+    {
+      "executable": "/opt/homebrew/opt/python@3.13/bin/python3.13",
+      "argv": [
+        "/opt/homebrew/opt/python@3.13/bin/python3.13",
+        "-O",
+        "/Users/kimchee/Documents/writ-decision-lab-build1/examples/consume_answer.py",
+        "--expected-model",
+        "/Users/kimchee/Documents/writ-decision-lab-build1/examples/weak/model.json",
+        "--expected-query",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpcmanvbsh/q",
+        "--result",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpcmanvbsh/r",
+        "--output",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpcmanvbsh/out"
+      ],
+      "cwd": "/Users/kimchee/Documents/writ-decision-lab-build1"
+    },
+    {
+      "executable": "/opt/homebrew/opt/python@3.13/bin/python3.13",
+      "argv": [
+        "/opt/homebrew/opt/python@3.13/bin/python3.13",
+        "-O",
+        "-m",
+        "writ_decision_lab",
+        "check",
+        "--model",
+        "/Users/kimchee/Documents/writ-decision-lab-build1/examples/weak/model.json",
+        "--query",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmp4xn67jne/q",
+        "--result",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmp4xn67jne/r",
+        "--output",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmp4xn67jne/check"
+      ],
+      "cwd": "/Users/kimchee/Documents/writ-decision-lab-build1"
+    },
+    {
+      "executable": "/opt/homebrew/opt/python@3.13/bin/python3.13",
+      "argv": [
+        "/opt/homebrew/opt/python@3.13/bin/python3.13",
+        "-O",
+        "/Users/kimchee/Documents/writ-decision-lab-build1/examples/consume_answer.py",
+        "--expected-model",
+        "/Users/kimchee/Documents/writ-decision-lab-build1/examples/weak/model.json",
+        "--expected-query",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmp4xn67jne/q",
+        "--result",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmp4xn67jne/r",
+        "--output",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmp4xn67jne/out"
+      ],
+      "cwd": "/Users/kimchee/Documents/writ-decision-lab-build1"
+    },
+    {
+      "executable": "/opt/homebrew/opt/python@3.13/bin/python3.13",
+      "argv": [
+        "/opt/homebrew/opt/python@3.13/bin/python3.13",
+        "-O",
+        "-m",
+        "writ_decision_lab",
+        "check",
+        "--model",
+        "/Users/kimchee/Documents/writ-decision-lab-build1/examples/weak/model.json",
+        "--query",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpoc1h5ehf/q",
+        "--result",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpoc1h5ehf/r",
+        "--output",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpoc1h5ehf/check"
+      ],
+      "cwd": "/Users/kimchee/Documents/writ-decision-lab-build1"
+    },
+    {
+      "executable": "/opt/homebrew/opt/python@3.13/bin/python3.13",
+      "argv": [
+        "/opt/homebrew/opt/python@3.13/bin/python3.13",
+        "-O",
+        "/Users/kimchee/Documents/writ-decision-lab-build1/examples/consume_answer.py",
+        "--expected-model",
+        "/Users/kimchee/Documents/writ-decision-lab-build1/examples/weak/model.json",
+        "--expected-query",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpoc1h5ehf/q",
+        "--result",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpoc1h5ehf/r",
+        "--output",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpoc1h5ehf/out"
+      ],
+      "cwd": "/Users/kimchee/Documents/writ-decision-lab-build1"
+    },
+    {
+      "executable": "/opt/homebrew/opt/python@3.13/bin/python3.13",
+      "argv": [
+        "/opt/homebrew/opt/python@3.13/bin/python3.13",
+        "-O",
+        "-m",
+        "writ_decision_lab",
+        "check",
+        "--model",
+        "/Users/kimchee/Documents/writ-decision-lab-build1/examples/weak/model.json",
+        "--query",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmp500qip_m/q",
+        "--result",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmp500qip_m/r",
+        "--output",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmp500qip_m/check"
+      ],
+      "cwd": "/Users/kimchee/Documents/writ-decision-lab-build1"
+    },
+    {
+      "executable": "/opt/homebrew/opt/python@3.13/bin/python3.13",
+      "argv": [
+        "/opt/homebrew/opt/python@3.13/bin/python3.13",
+        "-O",
+        "/Users/kimchee/Documents/writ-decision-lab-build1/examples/consume_answer.py",
+        "--expected-model",
+        "/Users/kimchee/Documents/writ-decision-lab-build1/examples/weak/model.json",
+        "--expected-query",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmp500qip_m/q",
+        "--result",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmp500qip_m/r",
+        "--output",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmp500qip_m/out"
+      ],
+      "cwd": "/Users/kimchee/Documents/writ-decision-lab-build1"
+    },
+    {
+      "executable": "/opt/homebrew/opt/python@3.13/bin/python3.13",
+      "argv": [
+        "/opt/homebrew/opt/python@3.13/bin/python3.13",
+        "-O",
+        "-m",
+        "writ_decision_lab",
+        "check",
+        "--model",
+        "/Users/kimchee/Documents/writ-decision-lab-build1/examples/weak/model.json",
+        "--query",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmp49fbr9lk/q",
+        "--result",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmp49fbr9lk/r",
+        "--output",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmp49fbr9lk/check"
+      ],
+      "cwd": "/Users/kimchee/Documents/writ-decision-lab-build1"
+    },
+    {
+      "executable": "/opt/homebrew/opt/python@3.13/bin/python3.13",
+      "argv": [
+        "/opt/homebrew/opt/python@3.13/bin/python3.13",
+        "-O",
+        "/Users/kimchee/Documents/writ-decision-lab-build1/examples/consume_answer.py",
+        "--expected-model",
+        "/Users/kimchee/Documents/writ-decision-lab-build1/examples/weak/model.json",
+        "--expected-query",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmp49fbr9lk/q",
+        "--result",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmp49fbr9lk/r",
+        "--output",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmp49fbr9lk/out"
+      ],
+      "cwd": "/Users/kimchee/Documents/writ-decision-lab-build1"
+    },
+    {
+      "executable": "/opt/homebrew/opt/python@3.13/bin/python3.13",
+      "argv": [
+        "/opt/homebrew/opt/python@3.13/bin/python3.13",
+        "-O",
+        "-m",
+        "writ_decision_lab",
+        "check",
+        "--model",
+        "/Users/kimchee/Documents/writ-decision-lab-build1/examples/weak/model.json",
+        "--query",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmp_7b0w2sx/q",
+        "--result",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmp_7b0w2sx/r",
+        "--output",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmp_7b0w2sx/check"
+      ],
+      "cwd": "/Users/kimchee/Documents/writ-decision-lab-build1"
+    },
+    {
+      "executable": "/opt/homebrew/opt/python@3.13/bin/python3.13",
+      "argv": [
+        "/opt/homebrew/opt/python@3.13/bin/python3.13",
+        "-O",
+        "/Users/kimchee/Documents/writ-decision-lab-build1/examples/consume_answer.py",
+        "--expected-model",
+        "/Users/kimchee/Documents/writ-decision-lab-build1/examples/weak/model.json",
+        "--expected-query",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmp_7b0w2sx/q",
+        "--result",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmp_7b0w2sx/r",
+        "--output",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmp_7b0w2sx/out"
+      ],
+      "cwd": "/Users/kimchee/Documents/writ-decision-lab-build1"
+    },
+    {
+      "executable": "/opt/homebrew/opt/python@3.13/bin/python3.13",
+      "argv": [
+        "/opt/homebrew/opt/python@3.13/bin/python3.13",
+        "-O",
+        "/Users/kimchee/Documents/writ-decision-lab-build1/examples/consume_answer.py",
+        "--expected-model",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpzw6xlcrp/m",
+        "--expected-query",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpzw6xlcrp/q",
+        "--result",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpzw6xlcrp/r",
+        "--output",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpzw6xlcrp/out"
+      ],
+      "cwd": "/Users/kimchee/Documents/writ-decision-lab-build1"
+    },
+    {
+      "executable": "/opt/homebrew/opt/python@3.13/bin/python3.13",
+      "argv": [
+        "/opt/homebrew/opt/python@3.13/bin/python3.13",
+        "-O",
+        "/Users/kimchee/Documents/writ-decision-lab-build1/examples/consume_answer.py",
+        "--expected-model",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpqbw9mmsz/m",
+        "--expected-query",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpqbw9mmsz/q",
+        "--result",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpqbw9mmsz/r",
+        "--output",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpqbw9mmsz/out"
+      ],
+      "cwd": "/Users/kimchee/Documents/writ-decision-lab-build1"
+    },
+    {
+      "executable": "/opt/homebrew/opt/python@3.13/bin/python3.13",
+      "argv": [
+        "/opt/homebrew/opt/python@3.13/bin/python3.13",
+        "-O",
+        "/Users/kimchee/Documents/writ-decision-lab-build1/examples/consume_answer.py",
+        "--expected-model",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpk0t8oc6q/m",
+        "--expected-query",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpk0t8oc6q/q",
+        "--result",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpk0t8oc6q/r",
+        "--output",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpk0t8oc6q/out"
+      ],
+      "cwd": "/Users/kimchee/Documents/writ-decision-lab-build1"
+    },
+    {
+      "executable": "/opt/homebrew/opt/python@3.13/bin/python3.13",
+      "argv": [
+        "/opt/homebrew/opt/python@3.13/bin/python3.13",
+        "-O",
+        "/Users/kimchee/Documents/writ-decision-lab-build1/examples/consume_answer.py",
+        "--expected-model",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpx67pkphd/m",
+        "--expected-query",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpx67pkphd/q",
+        "--result",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpx67pkphd/r",
+        "--output",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpx67pkphd/out"
+      ],
+      "cwd": "/Users/kimchee/Documents/writ-decision-lab-build1"
+    },
+    {
+      "executable": "/opt/homebrew/opt/python@3.13/bin/python3.13",
+      "argv": [
+        "/opt/homebrew/opt/python@3.13/bin/python3.13",
+        "-O",
+        "/Users/kimchee/Documents/writ-decision-lab-build1/examples/consume_answer.py",
+        "--expected-model",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmps3l6babo/m",
+        "--expected-query",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmps3l6babo/q",
+        "--result",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmps3l6babo/r",
+        "--output",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmps3l6babo/out"
+      ],
+      "cwd": "/Users/kimchee/Documents/writ-decision-lab-build1"
+    },
+    {
+      "executable": "/opt/homebrew/opt/python@3.13/bin/python3.13",
+      "argv": [
+        "/opt/homebrew/opt/python@3.13/bin/python3.13",
+        "-O",
+        "/Users/kimchee/Documents/writ-decision-lab-build1/examples/consume_answer.py",
+        "--expected-model",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmp0nitnovo/m",
+        "--expected-query",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmp0nitnovo/q",
+        "--result",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmp0nitnovo/r",
+        "--output",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmp0nitnovo/out"
+      ],
+      "cwd": "/Users/kimchee/Documents/writ-decision-lab-build1"
+    },
+    {
+      "executable": "/opt/homebrew/opt/python@3.13/bin/python3.13",
+      "argv": [
+        "/opt/homebrew/opt/python@3.13/bin/python3.13",
+        "-O",
+        "-c",
+        "import runpy;from unittest.mock import patch\nwith patch('writ_decision_lab.consumer.checker.check_bytes',side_effect=RuntimeError('SYNTHETIC_PRIVATE')): runpy.run_path('examples/consume_answer.py',run_name='__main__')",
+        "--expected-model",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmppbpnr56n/m",
+        "--expected-query",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmppbpnr56n/q",
+        "--result",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmppbpnr56n/r",
+        "--output",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmppbpnr56n/out"
+      ],
+      "cwd": "/Users/kimchee/Documents/writ-decision-lab-build1"
+    },
+    {
+      "executable": "/opt/homebrew/opt/python@3.13/bin/python3.13",
+      "argv": [
+        "/opt/homebrew/opt/python@3.13/bin/python3.13",
+        "-O",
+        "-c",
+        "import runpy;from unittest.mock import patch\nwith patch('writ_decision_lab.consumer.decode_result',side_effect=RuntimeError('SYNTHETIC_PRIVATE')): runpy.run_path('examples/consume_answer.py',run_name='__main__')",
+        "--expected-model",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpj_875fee/m",
+        "--expected-query",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpj_875fee/q",
+        "--result",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpj_875fee/r",
+        "--output",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpj_875fee/out"
+      ],
+      "cwd": "/Users/kimchee/Documents/writ-decision-lab-build1"
+    },
+    {
+      "executable": "/opt/homebrew/opt/python@3.13/bin/python3.13",
+      "argv": [
+        "/opt/homebrew/opt/python@3.13/bin/python3.13",
+        "-O",
+        "-c",
+        "import runpy;from unittest.mock import patch\nwith patch('writ_decision_lab.consumer.CheckedAnswer',side_effect=RuntimeError('SYNTHETIC_PRIVATE')): runpy.run_path('examples/consume_answer.py',run_name='__main__')",
+        "--expected-model",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpvi_ertwv/m",
+        "--expected-query",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpvi_ertwv/q",
+        "--result",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpvi_ertwv/r",
+        "--output",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpvi_ertwv/out"
+      ],
+      "cwd": "/Users/kimchee/Documents/writ-decision-lab-build1"
+    },
+    {
+      "executable": "/opt/homebrew/opt/python@3.13/bin/python3.13",
+      "argv": [
+        "/opt/homebrew/opt/python@3.13/bin/python3.13",
+        "-O",
+        "-c",
+        "\nimport inspect,json,sys\nfrom pathlib import Path\nfrom writ_decision_lab import solver,check_and_load\nfrom writ_decision_lab.errors import CheckFailure\nfrom writ_decision_lab.identity import output_bytes\nm=Path('examples/weak/model.json').read_bytes();q=Path('examples/weak/query.json').read_bytes()\nr=Path(sys.argv[1]).read_bytes()\ndef disabled(*a,**k): raise RuntimeError('producer disabled')\nnames=[n for n,v in vars(solver).items() if inspect.isfunction(v) and v.__module__==solver.__name__]\nfor n in names: setattr(solver,n,disabled)\nc=check_and_load(m,q,r)\nif c.summary()['evsi']!='1/8': raise RuntimeError('positive control failed')\nbad=json.loads(r);bad['answer'].update(observed_risk='0/1',evsi='1/4',net_value='1/4');bad['answer']['acquisition_risks']['observe_once']='0/1'\ntry: check_and_load(m,q,output_bytes(bad))\nexcept CheckFailure as e:\n    if e.status!='computation_mismatch': raise\nelse: raise RuntimeError('wrong answer exposed')\nprint(json.dumps({'optimized':sys.flags.optimize,'disabled':names}))\n",
+        "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpzkdiq0ix/result.json"
+      ],
+      "cwd": "/Users/kimchee/Documents/writ-decision-lab-build1"
+    },
+    {
+      "executable": "/opt/homebrew/opt/python@3.13/bin/python3.13",
+      "argv": [
+        "/opt/homebrew/opt/python@3.13/bin/python3.13",
+        "-O",
+        "-c",
+        "import json,sys;from pathlib import Path;from writ_decision_lab.identity import source_manifest;print(json.dumps({'optimized':sys.flags.optimize,'manifest':source_manifest(),'root':str(Path.cwd())}))"
+      ],
+      "cwd": "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpg7eymw_q/one"
+    },
+    {
+      "executable": "/opt/homebrew/opt/python@3.13/bin/python3.13",
+      "argv": [
+        "/opt/homebrew/opt/python@3.13/bin/python3.13",
+        "-O",
+        "-m",
+        "writ_decision_lab",
+        "solve",
+        "--model",
+        "examples/weak/model.json",
+        "--query",
+        "examples/weak/query.json",
+        "--output",
+        "result.json"
+      ],
+      "cwd": "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpg7eymw_q/one"
+    },
+    {
+      "executable": "/opt/homebrew/opt/python@3.13/bin/python3.13",
+      "argv": [
+        "/opt/homebrew/opt/python@3.13/bin/python3.13",
+        "-O",
+        "-m",
+        "writ_decision_lab",
+        "check",
+        "--model",
+        "examples/weak/model.json",
+        "--query",
+        "examples/weak/query.json",
+        "--result",
+        "result.json",
+        "--output",
+        "check.json"
+      ],
+      "cwd": "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpg7eymw_q/one"
+    },
+    {
+      "executable": "/opt/homebrew/opt/python@3.13/bin/python3.13",
+      "argv": [
+        "/opt/homebrew/opt/python@3.13/bin/python3.13",
+        "-O",
+        "examples/consume_answer.py",
+        "--expected-model",
+        "examples/weak/model.json",
+        "--expected-query",
+        "examples/weak/query.json",
+        "--result",
+        "result.json",
+        "--output",
+        "consumer.json"
+      ],
+      "cwd": "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpg7eymw_q/one"
+    },
+    {
+      "executable": "/opt/homebrew/opt/python@3.13/bin/python3.13",
+      "argv": [
+        "/opt/homebrew/opt/python@3.13/bin/python3.13",
+        "-O",
+        "-c",
+        "import json,sys;from pathlib import Path;from writ_decision_lab.identity import source_manifest;print(json.dumps({'optimized':sys.flags.optimize,'manifest':source_manifest(),'root':str(Path.cwd())}))"
+      ],
+      "cwd": "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpg7eymw_q/different/tree/two"
+    },
+    {
+      "executable": "/opt/homebrew/opt/python@3.13/bin/python3.13",
+      "argv": [
+        "/opt/homebrew/opt/python@3.13/bin/python3.13",
+        "-O",
+        "-m",
+        "writ_decision_lab",
+        "solve",
+        "--model",
+        "examples/weak/model.json",
+        "--query",
+        "examples/weak/query.json",
+        "--output",
+        "result.json"
+      ],
+      "cwd": "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpg7eymw_q/different/tree/two"
+    },
+    {
+      "executable": "/opt/homebrew/opt/python@3.13/bin/python3.13",
+      "argv": [
+        "/opt/homebrew/opt/python@3.13/bin/python3.13",
+        "-O",
+        "-m",
+        "writ_decision_lab",
+        "check",
+        "--model",
+        "examples/weak/model.json",
+        "--query",
+        "examples/weak/query.json",
+        "--result",
+        "result.json",
+        "--output",
+        "check.json"
+      ],
+      "cwd": "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpg7eymw_q/different/tree/two"
+    },
+    {
+      "executable": "/opt/homebrew/opt/python@3.13/bin/python3.13",
+      "argv": [
+        "/opt/homebrew/opt/python@3.13/bin/python3.13",
+        "-O",
+        "examples/consume_answer.py",
+        "--expected-model",
+        "examples/weak/model.json",
+        "--expected-query",
+        "examples/weak/query.json",
+        "--result",
+        "result.json",
+        "--output",
+        "consumer.json"
+      ],
+      "cwd": "/var/folders/41/htp4x4h178j6lz8scy3jrzjw0000gn/T/tmpg7eymw_q/different/tree/two"
+    }
+  ]
+}
