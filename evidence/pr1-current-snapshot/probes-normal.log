@@ -1,0 +1,12 @@
+test_01_snapshots_all_nested_collections (__main__.CurrentReview.test_01_snapshots_all_nested_collections) ... ok
+test_02_manifest_relocation_and_artifact_binding (__main__.CurrentReview.test_02_manifest_relocation_and_artifact_binding) ... ok
+test_03_depth_syntax_precedence (__main__.CurrentReview.test_03_depth_syntax_precedence) ... ok
+test_04_persistent_diagnostics_canaries (__main__.CurrentReview.test_04_persistent_diagnostics_canaries) ... ok
+test_05_consumer_entire_guard_separate_processes (__main__.CurrentReview.test_05_consumer_entire_guard_separate_processes) ... ok
+test_06_wrong_bundle_and_producer_disabled_controls (__main__.CurrentReview.test_06_wrong_bundle_and_producer_disabled_controls) ... ok
+test_07_eight_step_and_baseline_qualification (__main__.CurrentReview.test_07_eight_step_and_baseline_qualification) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 2.919s
+
+OK
