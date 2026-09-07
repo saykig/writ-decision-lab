@@ -10,6 +10,7 @@ from typing import Any
 from .errors import InputError
 
 MAX_BYTES = 262_144
+MAX_JSON_DEPTH = 32
 MAX_ABS_INTEGER = 10**12
 _RATIONAL = re.compile(r"(?:0|-?[1-9][0-9]*)(?:/[1-9][0-9]*)?\Z")
 
@@ -23,6 +24,51 @@ def _pairs(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
     return out
 
 
+def validate_json_depth(value: Any) -> None:
+    """Reject excessive depth and cycles without using Python recursion."""
+    pending = [(value, 1, True)]
+    active: set[int] = set()
+    while pending:
+        item, depth, entering = pending.pop()
+        if not isinstance(item, (dict, list)):
+            continue
+        identity = id(item)
+        if not entering:
+            active.remove(identity)
+            continue
+        if identity in active:
+            raise InputError("json_cycle")
+        if depth > MAX_JSON_DEPTH:
+            raise InputError("json_depth_limit")
+        active.add(identity)
+        pending.append((item, depth, False))
+        children = item.values() if isinstance(item, dict) else item
+        pending.extend((child, depth + 1, True) for child in children)
+
+
+def _preflight_json_depth(text: str) -> None:
+    """Bound decoder recursion while ignoring delimiters inside strings."""
+    depth = 0
+    quoted = False
+    escaped = False
+    for char in text:
+        if quoted:
+            if escaped:
+                escaped = False
+            elif char == "\\":
+                escaped = True
+            elif char == '"':
+                quoted = False
+        elif char == '"':
+            quoted = True
+        elif char in "[{":
+            depth += 1
+            if depth > MAX_JSON_DEPTH:
+                raise InputError("json_depth_limit")
+        elif char in "]}":
+            depth -= 1
+
+
 def loads_strict(raw: bytes) -> dict[str, Any]:
     if not isinstance(raw, bytes):
         raise InputError("input_must_be_bytes")
@@ -32,6 +78,7 @@ def loads_strict(raw: bytes) -> dict[str, Any]:
         text = raw.decode("utf-8", errors="strict")
     except UnicodeDecodeError as exc:
         raise InputError("invalid_utf8") from exc
+    _preflight_json_depth(text)
     try:
         value = json.loads(
             text,
@@ -40,8 +87,9 @@ def loads_strict(raw: bytes) -> dict[str, Any]:
         )
     except InputError:
         raise
-    except (json.JSONDecodeError, TypeError, ValueError) as exc:
+    except (json.JSONDecodeError, TypeError, ValueError, RecursionError) as exc:
         raise InputError("invalid_json") from exc
+    validate_json_depth(value)
     if not isinstance(value, dict):
         raise InputError("root_must_be_object")
     return value
@@ -84,4 +132,3 @@ def vector(values: Any, size: int, where: str) -> tuple[Fraction, ...]:
 
 def canonical_json_bytes(value: Any) -> bytes:
     return (json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False) + "\n").encode("utf-8")
-

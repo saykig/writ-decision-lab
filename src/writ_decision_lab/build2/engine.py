@@ -7,7 +7,6 @@ from typing import Callable
 
 from . import backend
 from .checker import CheckedResult, check
-from .errors import CheckError
 from .model import decode_problem, decode_query
 
 
@@ -43,7 +42,6 @@ def solve_and_check(problem_raw: bytes, query_raw: bytes, search: Callable = bac
         bundle = _unresolved(problem_raw, query_raw, problem, query, "backend_exception")
     try:
         return bundle, check(bundle, problem_raw, query_raw)
-    except CheckError:
+    except Exception:
         fallback = _unresolved(problem_raw, query_raw, problem, query, "candidate_evidence_failed_exact_check")
         return fallback, check(fallback, problem_raw, query_raw)
-
