@@ -70,25 +70,38 @@ candidate, but its certificate interface was not reproduced here. See
 
 ## Test evidence
 
-Final reviewed-state commands and exact results:
+Repair implementation head:
+`341fd0234d5270e2df2aad04ff3653f7ee93738e`. The report-only follow-up
+commit does not alter the implementation or tests exercised below.
 
-- `PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src python -m unittest discover -s
-  tests_build2 -v` — 39 tests passed in 0.622 seconds.
-- `PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src python -O -m unittest discover -s
-  tests_build2 -v` — 39 tests passed in 0.649 seconds.
-- `PYTHONPATH=src python examples/build2/change_and_recheck.py` — completed;
+Final repaired-state commands and exact results, run from the repository root
+under CPython 3.13.13:
+
+- `PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src PYENV_VERSION=3.13.13 python -m
+  unittest discover -s tests -v` — 60 Build 1 tests passed in 8.583 seconds.
+- `PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src PYENV_VERSION=3.13.13 python -m
+  unittest discover -s tests_build2 -v` — 46 Build 2 tests passed in 1.423
+  seconds.
+- `PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src PYENV_VERSION=3.13.13 python -O -m
+  unittest discover -s tests -v` — 60 Build 1 tests passed in 8.675 seconds.
+- `PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src PYENV_VERSION=3.13.13 python -O -m
+  unittest discover -s tests_build2 -v` — 46 Build 2 tests passed in 1.855
+  seconds.
+- `PYTHONPATH=src PYENV_VERSION=3.13.13 python
+  examples/build2/change_and_recheck.py` — completed;
   stale reuse refused, new maximum changed from `3/4` to `1/2`, and the old
   checked result remained valid under the old bytes.
-- `PYTHONPATH=src python -m compileall -q src comparison/build2 examples/build2
-  tests_build2` — completed without error.
 
 The suite includes positive controls beside malformed/noncanonical rationals,
 duplicate labels and JSON keys, dimension mismatch, unsupported semantics,
 stale family/query bytes, coherent false bundles, forged multipliers, witnesses
 violating constraints, invalid Farkas evidence, primal/dual disagreement,
 changed queries and families, impossible conditioning, endpoint ties, snapshot
-mutation, backend/checker exceptions, absent certificates, relocation, and both
-normal and optimized Python execution.
+mutation, backend/checker exceptions, malformed backend payload/status/evidence,
+closed operation-specific unresolved reason codes, absent certificates, bounded
+and hostile deep or cyclic result containers, relocation, and centralized
+optimization-flag propagation to every Python child under both normal and
+optimized Python execution, with an explicit normal-child control.
 
 ## Evidence classification
 
@@ -107,8 +120,9 @@ normal and optimized Python execution.
 - Floating candidate search plus bounded rational reconstruction can fail on
   valid problems; that yields unresolved, not a false mathematical status.
 - Limits are 32 state cells, 128 equalities, 128 inequalities, 16 actions, and
-  256 KiB per JSON input. Enumeration can be exponential before these files
-  reach the tool.
+  256 KiB and 32 container levels per JSON input. Result objects are also
+  bounded to 32 container levels when checked. Enumeration can be exponential
+  before these files reach the tool.
 - Only rational linear constraints are supported. Nonlinear independence,
   causal, rank, sequential, acquisition, statistical coverage, strategic, and
   authority semantics are absent.
