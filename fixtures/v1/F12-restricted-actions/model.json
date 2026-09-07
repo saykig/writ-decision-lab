@@ -1,0 +1,1 @@
+{"likelihood":[["1/1","0/1"],["0/1","1/1"]],"outcomes":["x0","x1"],"prior":["3/4","1/4"],"schema":"wdl.model.v1","states":["s0","s1"]}
