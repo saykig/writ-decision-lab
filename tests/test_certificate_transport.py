@@ -70,6 +70,8 @@ class CertificateTransportTests(unittest.TestCase):
         self.assertEqual(evidence["beta"], ["0"])
         report = json.loads(check_bytes(request, canonical_json_bytes(evidence)))
         self.assertEqual(report["status"], "checked")
+        self.assertEqual(report["target_certificate_status"], "checked")
+        self.assertEqual(report["transport_status"], "checked")
         self.assertEqual(report["bounds"], {"optimum_lower": "0", "policy_upper": "1", "regret_upper": "1"})
 
     def test_unchanged_subject_and_policy_have_zero_corrections(self):
@@ -99,6 +101,10 @@ class CertificateTransportTests(unittest.TestCase):
         evidence["alpha"] = ["0"]
         report = json.loads(check_bytes(request, canonical_json_bytes(evidence)))
         self.assertEqual(report["status"], "rejected")
+        self.assertEqual(report["target_certificate_status"], "checked")
+        self.assertEqual(report["transport_status"], "rejected")
+        self.assertEqual(report["warrant"], "checked target certificate only")
+        self.assertEqual(report["bounds"], {"optimum_lower": "0", "policy_upper": "1", "regret_upper": "1"})
         self.assertIn(report["diagnostics"][0]["code"], {"E_TRANSPORT_CORRECTION", "E_TRANSPORT_ENVELOPE"})
 
     def test_tampered_request_hash_is_rejected(self):
@@ -107,6 +113,8 @@ class CertificateTransportTests(unittest.TestCase):
         evidence["request_sha256"] = "0" * 64
         report = json.loads(check_bytes(request, canonical_json_bytes(evidence)))
         self.assertEqual(report["status"], "rejected")
+        self.assertEqual(report["target_certificate_status"], "checked")
+        self.assertEqual(report["transport_status"], "rejected")
         self.assertEqual(report["diagnostics"][0]["code"], "E_TRANSPORT_BINDING")
 
     def test_invalid_source_certificate_supplies_no_transport_warrant(self):
