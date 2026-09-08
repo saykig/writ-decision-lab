@@ -1,0 +1,41 @@
+name: Writ certificate transport integration validation
+
+on:
+  push:
+    branches:
+      - codex/writ-transport-integration-validation
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout pinned Decision Lab adapter
+        uses: actions/checkout@v4
+      - name: Checkout exact Writ integration source
+        uses: actions/checkout@v4
+        with:
+          repository: saykig/Writ
+          ref: dccd5908debc6f364723a69d15a0364aea4acd00
+          path: Writ
+      - name: Set up CPython 3.13
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version-file: Writ/.bun-version
+      - name: Install Writ dependencies
+        working-directory: Writ
+        run: bun install --frozen-lockfile
+      - name: Install exact Build 2 backend
+        run: python -m pip install scipy==1.17.0
+      - name: Run all real Decision Lab integration gates
+        working-directory: Writ
+        env:
+          WRIT_DECISION_LAB_ROOT: ${{ github.workspace }}
+          WRIT_DECISION_LAB_PYTHON: ${{ env.pythonLocation }}/bin/python
+        run: |
+          bun run test:decision-integration
+          bun run test:shared-analysis-integration
+          bun run test:certificate-transport-integration
