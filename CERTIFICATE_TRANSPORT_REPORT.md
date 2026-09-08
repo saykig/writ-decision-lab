@@ -44,8 +44,10 @@ The focused suite covers:
 - unchanged subject/policy returns zero corrections and the original tables exactly;
 - the PR5 two-step policy change returns target upper `7/8`, optimum lower `1/4`, and regret upper
   `5/8`;
-- a target-valid certificate with false correction/provenance evidence is rejected;
-- tampered request identities are rejected;
+- a target-valid certificate with false correction/provenance evidence keeps its ordinary target
+  warrant and bounds while the stronger transport warrant is rejected;
+- tampered request identities are rejected for transport without erasing an independently valid
+  target certificate;
 - an invalid source certificate supplies no transport warrant;
 - action-menu or loss-unit changes are unsupported rather than silently mapped;
 - subject names and explicit premise labels may change while the exact structural contract remains;
