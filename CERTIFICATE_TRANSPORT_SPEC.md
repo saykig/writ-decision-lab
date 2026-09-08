@@ -49,7 +49,7 @@ A target certificate may be mathematically valid but fail the stronger anchored-
 - nodes at most 64;
 - actions per node at most 4;
 - outcomes per action at most 4;
-- input rational numerator/denominator bit length at most 256; derived exact arithmetic is uncapped.
+- model coefficient numerator/denominator bit length at most 256; certificate and correction proof values are exact and have no separate bit cap beyond the object byte limit.
 
 ## CLI
 
