@@ -50,6 +50,7 @@ The focused suite covers:
 - action-menu or loss-unit changes are unsupported rather than silently mapped;
 - subject names and explicit premise labels may change while the exact structural contract remains;
 - certificate/proof values may exceed the 256-bit model-coefficient cap, preserving Bellman's derived-value boundary;
+- model coefficients above that 256-bit profile still fail closed;
 - noncanonical JSON bytes are rejected;
 - the receiver still checks with the producer disabled;
 - the CLI is deterministic and refuses output overwrite.
@@ -60,10 +61,10 @@ Environment: CPython 3.13.5, standard library only.
 
 ```text
 PYTHONPATH=src python -m unittest discover -s tests -v
-13 passed, 0 failed
+14 passed, 0 failed
 
 PYTHONPATH=src python -O -m unittest discover -s tests -v
-13 passed, 0 failed
+14 passed, 0 failed
 
 PYTHONPATH=src python -m compileall -q src tests
 passed
