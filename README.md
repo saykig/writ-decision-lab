@@ -56,3 +56,24 @@ permitting separately checked results to be composed.
 
 See `SPEC.md` for the frozen contract, `BUILD_1_REPORT.md` for evidence and verdict, and `HANDOFF.md`
 for operational continuation guidance.
+
+## Certificate transport/revalidation
+
+A separate bounded adapter implements Bellman's hardened identity-skeleton certificate-transport
+construction after an explicitly supplied model or policy change. It does not change Build 1 or
+Build 2 semantics. Mathematical authority, exact contracts, and limits are pinned in
+`CERTIFICATE_TRANSPORT_SPEC.md`.
+
+```bash
+export PYTHONPATH=src
+python -m writ_decision_lab.transport solve \
+  --request examples/transport/comparator-change-request.json \
+  --output /tmp/transport-evidence.json
+python -m writ_decision_lab.transport check \
+  --request examples/transport/comparator-change-request.json \
+  --evidence /tmp/transport-evidence.json \
+  --output /tmp/transport-check.json
+```
+
+The transport checker does not import its producer. It distinguishes ordinary target-certificate
+validity from the stronger anchored-transport warrant.
