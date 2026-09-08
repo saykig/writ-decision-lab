@@ -37,9 +37,9 @@ Source and target must preserve the same finite observable-history semantics, ex
 
 The checker does not import the producer. It independently validates the source certificate, evidence/request bindings, ordinary target certificate, exact `L'=L-alpha` and `U'=U+beta` relation, and Bellman's anchored extremal envelope equations at every node.
 
-A target certificate may be mathematically valid but fail the stronger anchored-transport warrant. That distinction is enforced.
+A target certificate may be mathematically valid but fail the stronger anchored-transport warrant. The check report preserves that distinction explicitly: `target_certificate_status` can remain `checked` while `transport_status` is `rejected`, and the target-certificate bounds remain visible. Overall `status=checked` is reserved for the stronger anchored-transport warrant.
 
-`certificate-transport-check.v1` returns `checked`, `rejected`, or `checker_error`. A checked result is conditional on the exact supplied subjects, policies, source certificate, correspondence, criterion, and bytes. It is not empirical validation, source acceptance, human review, formal proof, or authority to act.
+`certificate-transport-check.v1` returns overall `checked`, `rejected`, or `checker_error` together with the two component statuses. A checked transport result is conditional on the exact supplied subjects, policies, source certificate, correspondence, criterion, and bytes. It is not empirical validation, source acceptance, human review, formal proof, or authority to act.
 
 ## Bounded profile
 
