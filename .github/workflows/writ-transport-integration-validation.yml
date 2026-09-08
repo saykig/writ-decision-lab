@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: saykig/Writ
-          ref: dccd5908debc6f364723a69d15a0364aea4acd00
+          ref: 2c4b533f747e3d9ac7beb358a42b7dcaddb6d5c8
           path: Writ
       - name: Set up CPython 3.13
         uses: actions/setup-python@v5
