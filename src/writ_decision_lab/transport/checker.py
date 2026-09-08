@@ -77,12 +77,23 @@ def check_transport(request: Request, evidence: Evidence) -> dict[str, Fraction]
     return answer
 
 
-def _report(status: str, request_raw: bytes, evidence_raw: bytes, *, answer=None, diagnostic=None) -> dict:
+def _report(
+    status: str,
+    request_raw: bytes,
+    evidence_raw: bytes,
+    *,
+    target_status: str = "not_checked",
+    transport_status: str = "not_checked",
+    answer=None,
+    diagnostic=None,
+) -> dict:
     report = {
         "schema": CHECK_SCHEMA,
         "status": status,
         "request_sha256": sha256_hex(request_raw),
         "evidence_sha256": sha256_hex(evidence_raw),
+        "target_certificate_status": target_status,
+        "transport_status": transport_status,
         "warrant": None,
         "bounds": None,
         "diagnostics": [],
@@ -94,8 +105,12 @@ def _report(status: str, request_raw: bytes, evidence_raw: bytes, *, answer=None
         ],
     }
     if answer is not None:
-        report["warrant"] = "checked target certificate and anchored transport"
         report["bounds"] = {key: fraction_text(value) for key, value in answer.items()}
+        report["warrant"] = (
+            "checked target certificate and anchored transport"
+            if transport_status == "checked"
+            else "checked target certificate only"
+        )
     if diagnostic is not None:
         report["diagnostics"] = [diagnostic]
     return report
@@ -105,11 +120,47 @@ def check_report(request_raw: bytes, evidence_raw: bytes) -> dict:
     try:
         request = decode_request(request_raw)
         evidence = decode_evidence(evidence_raw, request)
-        return _report("checked", request_raw, evidence_raw, answer=check_transport(request, evidence))
     except TransportError as error:
         return _report("rejected", request_raw, evidence_raw, diagnostic=error.diagnostic())
     except Exception:
         return _report("checker_error", request_raw, evidence_raw, diagnostic={"code": "E_CHECKER_INTERNAL", "path": "$", "message": "Unexpected checker failure."})
+
+    try:
+        target_answer = check_certificate(request.target_subject, request.target_policy, evidence.certificate)
+    except TransportError as error:
+        return _report("rejected", request_raw, evidence_raw, target_status="rejected", diagnostic=error.diagnostic())
+    except Exception:
+        return _report("checker_error", request_raw, evidence_raw, diagnostic={"code": "E_CHECKER_INTERNAL", "path": "$", "message": "Unexpected checker failure."})
+
+    try:
+        transport_answer = check_transport(request, evidence)
+        return _report(
+            "checked",
+            request_raw,
+            evidence_raw,
+            target_status="checked",
+            transport_status="checked",
+            answer=transport_answer,
+        )
+    except TransportError as error:
+        return _report(
+            "rejected",
+            request_raw,
+            evidence_raw,
+            target_status="checked",
+            transport_status="rejected",
+            answer=target_answer,
+            diagnostic=error.diagnostic(),
+        )
+    except Exception:
+        return _report(
+            "checker_error",
+            request_raw,
+            evidence_raw,
+            target_status="checked",
+            answer=target_answer,
+            diagnostic={"code": "E_CHECKER_INTERNAL", "path": "$", "message": "Unexpected checker failure."},
+        )
 
 
 def check_bytes(request_raw: bytes, evidence_raw: bytes) -> bytes:
