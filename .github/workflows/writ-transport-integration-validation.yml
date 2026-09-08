@@ -28,6 +28,9 @@ jobs:
       - name: Install Writ dependencies
         working-directory: Writ
         run: bun install --frozen-lockfile
+      - name: Build Writ provenance dependency
+        working-directory: Writ
+        run: bun run --filter '@writ/provenance' build
       - name: Install exact Build 2 backend
         run: python -m pip install scipy==1.17.0
       - name: Run all real Decision Lab integration gates
