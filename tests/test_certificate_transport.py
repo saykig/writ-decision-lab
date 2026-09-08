@@ -129,6 +129,24 @@ class CertificateTransportTests(unittest.TestCase):
             decode_request(canonical_json_bytes(value))
         self.assertEqual(caught.exception.code, "E_UNSUPPORTED_TRANSPORT")
 
+    def test_subject_names_and_premises_may_change(self):
+        request = comparator_request()
+        self.assertEqual(json.loads(check_bytes(request, produce_bytes(request)))["status"], "checked")
+
+    def test_certificate_values_are_not_subject_to_model_coefficient_bit_cap(self):
+        value = json.loads(comparator_request())
+        huge = str(2**300)
+        value["source"]["subject"]["nodes"] = [{"history": [], "terminal": "0", "actions": []}]
+        value["target"]["subject"]["nodes"] = copy.deepcopy(value["source"]["subject"]["nodes"])
+        value["source"]["policy"] = {"choices": []}
+        value["target"]["policy"] = {"choices": []}
+        value["source"]["certificate"] = {"lower": ["-" + huge], "upper": [huge]}
+        value["correspondence"] = identity(value["source"]["subject"]["nodes"])
+        request = canonical_json_bytes(value)
+        evidence = produce_bytes(request)
+        self.assertEqual(json.loads(evidence)["certificate"], value["source"]["certificate"])
+        self.assertEqual(json.loads(check_bytes(request, evidence))["status"], "checked")
+
     def test_noncanonical_request_bytes_are_rejected(self):
         with self.assertRaises(TransportError) as caught:
             produce_bytes(comparator_request().rstrip(b"\n") + b" \n")
