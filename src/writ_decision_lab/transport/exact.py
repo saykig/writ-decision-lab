@@ -142,11 +142,24 @@ def rational(value: Any, path: str) -> Fraction:
         numerator, denominator = int(numerator_text), int(denominator_text)
     else:
         numerator, denominator = int(value), 1
-    if max(abs(numerator).bit_length(), denominator.bit_length()) > MAX_RATIONAL_BITS:
-        fail("E_RATIONAL_LIMIT", path, "Rational coefficient exceeds the 256-bit bounded profile.")
     result = Fraction(numerator, denominator)
     if fraction_text(result) != value:
         fail("E_RATIONAL", path, "Rational string is not in reduced canonical form.")
+    is_proof_value = (
+        ".certificate." in path
+        or path.startswith("$.certificate.")
+        or path.startswith("$.alpha[")
+        or path.startswith("$.beta[")
+    )
+    if (
+        not is_proof_value
+        and max(abs(numerator).bit_length(), denominator.bit_length()) > MAX_RATIONAL_BITS
+    ):
+        fail(
+            "E_RATIONAL_LIMIT",
+            path,
+            "Rational model coefficient exceeds the 256-bit bounded profile.",
+        )
     return result
 
 
