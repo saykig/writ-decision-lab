@@ -6,7 +6,7 @@ containing the review and relevant durable evidence. That reviewed commit was pu
 first. This publication adds documentation and evidence; it does not modify runtime code, tests,
 fixtures, original reports, or historical outputs.
 
-[The review report](../../PR1_CURRENT_SNAPSHOT_REVIEW.md) is a byte-for-byte copy of the completed
+[The review report](../../docs/reviews/pr1/current-snapshot-review.md) is a byte-for-byte copy of the completed
 local assessment, including its archival limitation and account of the earlier local-only review.
 Its statements that nothing was pushed and that the report was outside the checkout describe that
 review session, before this separately authorized publication. Its verified subject remains the

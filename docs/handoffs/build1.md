@@ -73,9 +73,9 @@ proof work remains deferred until an actual accepted-state or theorem bottleneck
 ## PR #1 repair appendix — 6 September 2026
 
 The preceding handoff is preserved as historical evidence. Current repair status and the narrower
-interpretation of the baseline preference are in [PR1_REPAIR_REPORT.md](PR1_REPAIR_REPORT.md),
-[PR1_REVIEW_RESPONSE.md](PR1_REVIEW_RESPONSE.md), and
-[PR1_CHALLENGE_MATRIX.md](PR1_CHALLENGE_MATRIX.md). All seven explicitly requested repairs pass
+interpretation of the baseline preference are in [the repair report](../reviews/pr1/repair-report.md),
+[review response](../reviews/pr1/review-response.md), and
+[challenge matrix](../reviews/pr1/challenge-matrix.md). All seven explicitly requested repairs pass
 local regression checks (60 normal / 60 optimized); exact replay of missing reviewer artifacts and
 an audit against the absent outer directive remain uncompleted. This does not authorize merge.
 

@@ -66,7 +66,7 @@ The backend investigation directly observed SciPy 1.17.0 and the absence of an
 infeasibility-certificate field in its infeasible `linprog` result. SoPlex was
 not installed. Upstream source reports make SoPlex a credible future exact
 candidate, but its certificate interface was not reproduced here. See
-`BACKEND_INVESTIGATION_BUILD_2.md`.
+[`backend-investigation-build2.md`](backend-investigation-build2.md).
 
 ## Test evidence
 
@@ -80,12 +80,12 @@ under CPython 3.13.13:
 - `PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src PYENV_VERSION=3.13.13 python -m
   unittest discover -s tests -v` — 60 Build 1 tests passed in 8.583 seconds.
 - `PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src PYENV_VERSION=3.13.13 python -m
-  unittest discover -s tests_build2 -v` — 46 Build 2 tests passed in 1.423
+  unittest discover -s tests -v` — the active test suite includes the 46 Build 2 tests
   seconds.
 - `PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src PYENV_VERSION=3.13.13 python -O -m
   unittest discover -s tests -v` — 60 Build 1 tests passed in 8.675 seconds.
 - `PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src PYENV_VERSION=3.13.13 python -O -m
-  unittest discover -s tests_build2 -v` — 46 Build 2 tests passed in 1.855
+  unittest discover -s tests -v` — the active test suite includes the 46 Build 2 tests
   seconds.
 - `PYTHONPATH=src PYENV_VERSION=3.13.13 python
   examples/build2/change_and_recheck.py` — completed;

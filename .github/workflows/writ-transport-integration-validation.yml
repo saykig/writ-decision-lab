@@ -3,7 +3,10 @@ name: Writ certificate transport integration validation
 on:
   push:
     branches:
-      - codex/writ-transport-integration-validation
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   validate:

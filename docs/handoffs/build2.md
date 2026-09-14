@@ -10,29 +10,29 @@ untrusted candidate search; the checker is exact and independent.
 Run from repository root:
 
 ```sh
-PYTHONPATH=src python -m unittest discover -s tests_build2 -v
-PYTHONPATH=src python -O -m unittest discover -s tests_build2 -v
+PYTHONPATH=src python -m unittest discover -s tests -v
+PYTHONPATH=src python -O -m unittest discover -s tests -v
 PYTHONPATH=src python examples/build2/change_and_recheck.py
 ```
 
 Reproduce the dependency with:
 
 ```sh
-python -m pip install -r requirements-build2.txt
+python -m pip install -r requirements/build2.txt
 ```
 
 ## File map
 
-- `BUILD_2_SPEC.md`: authoritative implemented scope and guarantees.
-- `BACKEND_INVESTIGATION_BUILD_2.md`: observed backend evidence and selection.
+- [`../specifications/build2.md`](../specifications/build2.md): authoritative implemented scope and guarantees.
+- [`../reports/backend-investigation-build2.md`](../reports/backend-investigation-build2.md): observed backend evidence and selection.
 - `src/writ_decision_lab/build2/`: strict decoder, adapter, exact checker,
   orchestration, and fail-closed consumer.
 - `fixtures/v2/`: A–H regression inputs.
-- `tests_build2/test_build2.py`: positive and adversarial checks.
+- `tests/test_build2.py`: positive and adversarial checks.
 - `examples/build2/change_and_recheck.py`: independent-byte stale refusal and
   revision sequence.
 - `comparison/build2/`: equal-assurance simpler workflow and comparison.
-- `BUILD_2_REPORT.md`: results, evidence classification, and judgment.
+- [`../reports/build2.md`](../reports/build2.md): results, evidence classification, and judgment.
 
 ## Safe extension boundary
 
@@ -57,4 +57,3 @@ the transformed primal witness, and matching exact dual bounds are all checked.
 - the simpler workflow is clearer and answer-equivalent in this tested scope.
 
 No Build 3, Writ integration, PR merge, or real-world ingestion is authorized.
-

@@ -17,7 +17,7 @@ release or installation route.
 | Candidate | Exact rational ability | Primal/dual/infeasibility evidence | Installation and packaging | License | Fitness here |
 |---|---|---|---|---|---|
 | SoPlex | Source-reported by its official README: rational input, exact solutions, rational LU, continued-fraction reconstruction | Not directly observed because no executable or binding was installed; a dependable Python-facing certificate path was therefore not established | Source/C++ and standalone routes are documented upstream, but not reproduced in this image | Apache-2.0 in upstream `LICENSE` | Promising future adapter; unavailable for this build's reproducible cloud execution |
-| SciPy 1.17 `linprog` using bundled HiGHS | Floating candidate search, not exact rational solving | Directly observed primal vectors and feasible dual marginals; no direct infeasibility certificate field in the probe | Already installed; pinned by `requirements-build2.txt`; SciPy requires Python >=3.11 in this image | BSD-style SciPy distribution; bundled HiGHS upstream is MIT | Selected only as an untrusted candidate generator; exact status comes solely from the independent rational checker |
+| SciPy 1.17 `linprog` using bundled HiGHS | Floating candidate search, not exact rational solving | Directly observed primal vectors and feasible dual marginals; no direct infeasibility certificate field in the probe | Pinned by `requirements/build2.txt`; SciPy requires Python >=3.11 in this image | BSD-style SciPy distribution; bundled HiGHS upstream is MIT | Selected only as an untrusted candidate generator; exact status comes solely from the independent rational checker |
 | Standalone HiGHS / `highspy` | Floating solver; no exact-rational claim used | Not directly observed; `highspy` and executable absent | Upstream documents CMake, binaries, and PyPI, but none was installed here | MIT upstream | No advantage over the bundled candidate search for this bounded run |
 
 Official upstream records inspected:
@@ -38,4 +38,3 @@ The judgment would change if a packaged SoPlex (or another exact backend)
 provided a stable, reproducible interface for primal optima, dual bounds, and
 infeasibility certificates in this environment. Such a backend could replace
 candidate search without changing the checker contract.
-
